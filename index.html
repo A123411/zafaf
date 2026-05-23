@@ -1,1 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed & Mariam Wedding Invitation</title>
+    <style>
+        /* الإعدادات العامة والخلفية الكلاسيكية للموقع */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #e6ebe0; /* لون خلفية هاديء يناسب الورد والألوان المائية */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* حاوية الجواب */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* الجواب نفسه */
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #d4a373; /* لون المغلف الأساسي */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        /* غطاء الجواب (المثلث اللي فوق) */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            z-index: 3;
+            border-top: 110px solid #c69363;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            transform-origin: top;
+            transition: transform 0.5s ease 0.3s, z-index 0.2s ease 0.3s;
+        }
+
+        /* زوايا الجواب الأمامية */
+        .envelope::after {
+            content: '';
+            position: absolute;
+            z-index: 4;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 100px solid #bd8a58;
+            border-left: 150px solid #c69363;
+            border-right: 150px solid #c69363;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        /* الكارت اللي جوه الجواب */
+        .card {
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 280px;
+            height: 180px;
+            background: #fff;
+            background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            z-index: 2;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            transition: transform 0.6s ease, z-index 0.1s ease 0.5s, width 0.5s ease 0.6s, height 0.5s ease 0.6s, left 0.5s ease 0.6s;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            color: #556b2f;
+            font-size: 1.5rem;
+        }
+
+        /* زر الفتح المكتوب فوق الجواب */
+        .open-btn {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: #556b2f;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .open-btn:hover {
+            background: #6b8e23;
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        /* ----------------------------------
+           أنيميشن فتح الجواب وفرد الكارت 
+        ---------------------------------- */
+        .envelope-wrapper.open .envelope::before {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .card {
+            /* يرتفع لفوق أولاً ثم يخرج أمام الغطاء ويأخذ حجم الشاشة */
+            transform: translateY(-120px);
+            z-index: 5;
+            width: 90vw;
+            max-width: 450px;
+            height: 80vh;
+            left: calc(50% - 45vw);
+        }
+        
+        /* تظبيط مكان الكارت في الشاشات الكبيرة */
+        @media (min-width: 500px) {
+            .envelope-wrapper.open .card {
+                left: calc(50% - 225px);
+            }
+        }
+
+        /* إخفاء الزرار بعد الضغط */
+        .envelope-wrapper.open .open-btn {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* محتويات كارت الدعوة (بتظهر بعد الفتح) */
+        .invitation-content {
+            opacity: 0;
+            transition: opacity 0.5s ease 1s;
+            display: none;
+            width: 100%;
+        }
+
+        .envelope-wrapper.open .invitation-content {
+            display: block;
+            opacity: 1;
+        }
+
+        /* العداد التنازلي */
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            background: #f4f7f6;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #556b2f;
+        }
+
+        .countdown-item label {
+            font-size: 0.7rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-wrapper" id="invitationContainer">
+        <button class="open-btn" onclick="openEnvelope()">OPEN THE INVITATION</button>
+        
+        <div class="envelope">
+            <div class="card">
+                <h2>Mohamed & Mariam</h2>
+                
+                <div class="invitation-content">
+                    <p style="color: #888; font-style: italic;">Together with their families</p>
+                    <h1 style="color: #556b2f; margin: 10px 0;">September 1st, 2026</h1>
+                    <p>6:00 PM</p>
+                    <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+                    
+                    <h3>Countdown To Our Forever</h3>
+                    <div class="countdown">
+                        <div class="countdown-item"><span id="days">00</span><label>Days</label></div>
+                        <div class="countdown-item"><span id="hours">00</span><label>Hours</label></div>
+                        <div class="countdown-item"><span id="mins">00</span><label>Mins</label></div>
+                        <div class="countdown-item"><span id="secs">00</span><label>Secs</label></div>
+                    </div>
+
+                    <p style="margin-top: 25px; font-weight: bold; color: #c69363;">Wedding Venue</p>
+                    <p style="font-size: 0.9rem; margin: 5px 0;">Four Seasons Hotel Cairo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+
+    <script>
+        function openEnvelope() {
+            // تشغيل الأنيميشن الخاص بالفتح والفرد
+            document.getElementById('invitationContainer').classList.add('open');
+            
+            // تشغيل الموسيقى تلقائياً
+            var music = document.getElementById('bgMusic');
+            music.play().catch(function(error) {
+                console.log("البراوزر حظر التشغيل التلقائي حتى يتفاعل المستخدم بالضغط.");
+            });
+        }
+
+        // سكريبت العداد التنازلي ليوم 1 سبتمبر 2026
+        const targetDate = new Date('September 1, 2026 18:00:00').getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('mins').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('secs').innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            if (difference < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('mins').innerText = '00';
+                document.getElementById('secs').innerText = '00';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
 
