@@ -1,111 +1,76 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
-    <style>
-        /* إعداد الصفحة */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #8b9275; /* اللون الزيتوني للخلفية */
-        }
-
-        /* حاوية التصميم */
-        .page-container {
-            position: relative;
-            width: 100%;
-            max-width: 450px;
-            height: 100vh;
-            margin: 0 auto;
-            background-image: url('https://a123411.github.io/zafaf/castle.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* الظرف (المثلث) */
-        .envelope-triangle {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 350px;
-            background-color: #f4f1ea;
-            clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 40px;
-            transition: transform 1s ease-in-out;
-            z-index: 10;
-        }
-
-        /* الختم الشمعي */
-        .seal-img {
-            width: 110px;
-            height: 110px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .seal-img:hover {
-            transform: scale(1.05);
-        }
-
-        /* كلمة Open */
-        .open-label {
-            margin-top: 10px;
-            font-family: sans-serif;
-            color: #888;
-            font-size: 14px;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-
-        /* عند الفتح - اختفاء المثلث */
-        .envelope-triangle.hidden {
-            transform: translateY(100%);
-        }
-
-        /* المحتوى الداخلي الذي يظهر بعد الفتح */
-        .content-area {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 20px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="page-container">
-        <div class="content-area">
-            <h1>أهلاً بكم في زفافنا</h1>
+<!-- استبدل قسم introOverlay بالكامل بهذا الكود -->
+<div id="introOverlay">
+    <div id="petalContainer"></div>
+    <div class="envelope-container">
+        <div class="envelope-flap"></div> <!-- الغطاء الذي سيفتح -->
+        <div class="envelope-body">
+            <div class="wax-seal" onclick="openInvitation()"></div>
         </div>
-
-        <div class="envelope-triangle" id="envelope">
-            <img src="https://a123411.github.io/zafaf/seal.png" class="seal-img" onclick="openEnvelope()" alt="Seal">
-            <div class="open-label" onclick="openEnvelope()">Open</div>
-        </div>
+        <div class="open-instruction" onclick="openInvitation()">اضغط لفتح الدعوة</div>
     </div>
+</div>
 
-    <script>
-        function openEnvelope() {
-            document.getElementById('envelope').classList.add('hidden');
-        }
-    </script>
-</body>
-</html>
+<style>
+    /* تحديثات الظرف السينمائية */
+    .envelope-container {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        background: #e5dfd2;
+        transition: all 1s ease-in-out;
+        z-index: 20;
+    }
 
+    .envelope-flap {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: #dcd6c8;
+        clip-path: polygon(0 0, 100% 0, 50% 50%);
+        transition: transform 0.8s ease;
+        transform-origin: top;
+        z-index: 2;
+    }
 
+    .envelope-container.open .envelope-flap {
+        transform: rotateX(180deg);
+    }
 
+    .envelope-container.open {
+        transform: scale(1.5);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .wax-seal {
+        position: absolute;
+        top: 40px; left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        /* ... باقي تنسيق الختم كما هو ... */
+    }
+
+    .open-instruction {
+        position: absolute;
+        bottom: -50px;
+        width: 100%;
+        text-align: center;
+        font-family: 'Amiri', serif;
+        color: var(--text-gold);
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function openInvitation() {
+        const envelope = document.querySelector('.envelope-container');
+        const overlay = document.getElementById('introOverlay');
+        
+        envelope.classList.add('open');
+        
+        // إخفاء الـ Overlay بعد انتهاء حركة الفتح
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 1000);
+    }
+</script>
