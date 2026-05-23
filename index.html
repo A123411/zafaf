@@ -11,10 +11,10 @@
 
     <style>
         :root {
-            --bg-olive: #6b7547; /* اللون الأخضر الزيتوني المحيط بالكارت */
-            --bg-envelope: #fbf9f5; /* اللون الكريمي الفاتح للظرف */
-            --text-gold: #c5a872; /* الذهبي الدافئ للنصوص */
-            --text-dark: #2f3625; /* الزيتوني الداكن */
+            --bg-olive: #6b7547; 
+            --bg-envelope: #f6f3eb; 
+            --text-gold: #c5a872; 
+            --text-dark: #2f3625; 
             --text-muted: #8a9281;
         }
 
@@ -36,7 +36,7 @@
             position: relative;
         }
 
-        /* --- 1. صفحة البداية الموزونة بالكامل (طبق الأصل من طلبك) --- */
+        /* --- 1. صفحة البداية والمقدمة الملكية المستقرة --- */
         #introOverlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -44,32 +44,45 @@
             z-index: 999;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* يرتكز الظرف في الأسفل */
-            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: flex-end; /* ليرتكز الظرف بالأسفل */
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* حاوية الظرف السفلي المفتوح على شكل V لتفادي أي قطع في الختم */
-        .envelope-bottom {
+        /* حاوية الظرف السفلي الذكية */
+        .envelope-wrapper {
             position: relative;
-            z-index: 3;
             width: 100%;
             max-width: 415px;
-            height: 38vh; /* ارتفاع متناسق يغطي الثلث السفلي */
-            background: linear-gradient(to bottom, #ffffff 0%, var(--bg-envelope) 100%);
-            /* رسم شكل الـ V المفتوح من الأعلى بدقة لمنع تداخل الحواف */
-            clip-path: polygon(0 35%, 50% 0, 100% 35%, 100% 100%, 0 100%);
-            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.08);
+            height: 40vh;
+            background-color: var(--bg-envelope);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 60px;
+            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* الختم الشمعي الذهبي البارز ثلاثي الأبعاد المكتمل وبدون أي قطع */
+        /* رسم زاوية الـ V الفخمة للظرف باستخدام حدود حقيقية آمنة لا تقص الختم */
+        .envelope-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: 0;
+            width: 0; height: 0;
+            border-left: 207.5px solid transparent;
+            border-right: 207.5px solid transparent;
+            border-bottom: 40px solid var(--bg-envelope);
+        }
+        @media(max-width: 415px) {
+            .envelope-wrapper::before {
+                border-left: 50vw solid transparent;
+                border-right: 50vw solid transparent;
+            }
+        }
+
+        /* الختم الشمعي الذهبي البارز ثلاثي الأبعاد - كامل ومستدير بدون أي قص */
         .wax-seal {
             position: absolute;
-            top: -20px; /* مكان موزون فوق زاوية الـ V تماماً ليظهر كاملاً */
+            top: -55px; /* يرتكز بدقة فوق قمة زاوية الظرف */
             width: 110px;
             height: 110px;
             background: radial-gradient(circle, #fde7c4 0%, #cca96e 55%, #9c7b43 85%, #6e5427 100%);
@@ -82,15 +95,15 @@
                         inset 0 -5px 12px rgba(0,0,0,0.3);
             cursor: pointer;
             animation: pulseSeal 2.5s infinite ease-in-out;
-            transition: transform 0.3s ease;
-            z-index: 4;
+            transition: transform 0.2s ease;
+            z-index: 10;
         }
         
         .wax-seal:hover {
             transform: scale(1.05);
         }
 
-        /* حفر الشعار الفخم الداخلي M&M */
+        /* حفر حروف M&M الفاخرة داخل الختم */
         .wax-seal::after {
             content: 'M&M';
             font-family: 'Alex Brush', cursive;
@@ -108,7 +121,7 @@
             font-weight: bold;
         }
 
-        /* الوردة الصغيرة الزخرفية داخل الختم الشمعي */
+        /* وردة زينة صغيرة أسفل الحروف */
         .wax-seal::before {
             content: '✿';
             position: absolute;
@@ -120,13 +133,14 @@
         /* كلمة Open السفلية الأنيقة */
         .open-btn-text {
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 5px;
             color: #554831;
             text-transform: uppercase;
-            margin-top: 85px;
+            margin-top: 40px;
             font-weight: 500;
             cursor: pointer;
+            z-index: 9;
             transition: color 0.3s;
         }
         .open-btn-text:hover {
@@ -139,7 +153,7 @@
             100% { transform: scale(1); box-shadow: 0 12px 28px rgba(69, 53, 23, 0.45); }
         }
 
-        /* تأثير النزول والاختفاء السلس للأسفل عند فتح الكارت */
+        /* حركة النزول والاختفاء السلسة للأسفل عند النقر للفتح */
         .fade-out {
             opacity: 0;
             pointer-events: none;
@@ -163,7 +177,6 @@
         }
         .app-container::-webkit-scrollbar { display: none; }
 
-        /* إطار داخلي مذهب راقٍ ونحيف للبطاقة */
         .app-container::before {
             content: '';
             position: absolute;
@@ -258,7 +271,6 @@
             font-weight: 500;
         }
 
-        /* العداد التنازلي الكلاسيكي */
         .countdown-card {
             background: rgba(255, 255, 255, 0.6);
             border: 1px solid rgba(197, 168, 114, 0.2);
@@ -299,7 +311,6 @@
             margin-top: 4px;
         }
 
-        /* تفاصيل ومكان القاعة الخريطة */
         .venue-section {
             margin: 35px 0;
         }
@@ -374,7 +385,7 @@
 <body>
 
     <div id="introOverlay">
-        <div class="envelope-bottom">
+        <div class="envelope-wrapper">
             <div class="wax-seal" onclick="openInvitation()"></div>
             <div class="open-btn-text" onclick="openInvitation()">Open</div>
         </div>
@@ -428,13 +439,13 @@
             createPetals();
         };
 
-        // دالة فتح الظرف السينمائية وانزلاقه لأسفل بسلاسة تامة للخارج
+        // دالة فتح الظرف وانزلاقه لأسفل بسلاسة تامة للخارج ليظهر الكارت
         function openInvitation() {
             const overlay = document.getElementById('introOverlay');
             overlay.classList.add('fade-out');
         }
 
-        // نظام تساقط بتلات الورد المستقر بالكود
+        // نظام تساقط بتلات الورد المستقر
         function createPetals() {
             const container = document.getElementById('petalContainer');
             const totalPetals = 35; 
@@ -460,7 +471,7 @@
             }
         }
 
-        // نظام العداد التنازلي التلقائي الدقيق لعام 2026
+        // نظام العداد التنازلي التلقائي لعام 2026
         const eventDate = new Date('September 1, 2026 18:00:00').getTime();
         const timerInterval = setInterval(function() {
             const now = new Date().getTime();
