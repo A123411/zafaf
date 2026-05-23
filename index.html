@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed & Mariam - Wedding Invitation</title>
+    <title>The Wedding of Mohamed & Mariam</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
+        /* --- 1. الإعدادات العامة والألوان الأساسية --- */
         :root {
-            --bg-color: #f3f5f0;
-            --primary-color: #4a5d4e;
-            --text-color: #333;
-            --accent-color: #c5a880;
+            --bg-overlay: rgba(20, 24, 21, 0.65); /* تأثير داكن فخم يبرز الورد */
+            --glass-bg: rgba(255, 255, 255, 0.08); /* زجاج شفاف فاخر */
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-gold: #dfba81; /* لون الذهب المطفي الكلاسيكي */
+            --text-light: #f7f9f6;
+            --text-muted: #b3bcb5;
         }
 
         * {
@@ -24,376 +28,300 @@
 
         body {
             min-height: 100vh;
+            background: #141815 url('https://images.unsplash.com/photo-1546032996-6df5b30833a3?q=80&w=1200') center center no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #e2e7df url('https://images.unsplash.com/photo-1546032996-6df5b30833a3?q=80&w=1000') center center no-repeat;
-            background-size: cover;
-            font-family: 'Playfair Display', serif;
-            overflow: hidden;
-            position: relative;
+            overflow-x: hidden;
         }
 
-        /* طبقة ناعمة عشان تدي روح الـ Watercolor للخلفية */
+        /* طبقة حماية سينمائية تغطي الخلفية بالكامل وتمنع بهتان الألوان */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(243, 245, 240, 0.65);
-            backdrop-filter: blur(3px);
+            background: var(--bg-overlay);
+            backdrop-filter: blur(4px);
             z-index: 1;
         }
 
-        .main-wrapper {
+        /* --- 2. الهيكل الخارجي (موزون على مقاسات الموبايل) --- */
+        .app-container {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* زر OPEN الفخم اللي في الهوا */
-        .open-btn {
-            position: absolute;
-            top: 45%;
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
-            font-weight: 500;
-            letter-spacing: 4px;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.4s ease;
-            padding: 15px;
-        }
-        
-        .open-btn:hover {
-            letter-spacing: 6px;
-            color: #2c3a2f;
-            transform: scale(1.05);
-        }
-
-        /* حاوية الظرف الكلي */
-        .envelope-container {
-            position: relative;
-            width: 340px;
-            height: 240px;
-            background: #e8dfd5;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-            border-radius: 4px;
-            perspective: 1500px;
-            transition: all 0.5s ease;
-        }
-
-        /* غطاء الظرف اللي بيفتح لافوق */
-        .envelope-flap {
-            position: absolute;
-            top: 0; left: 0; width: 0; height: 0;
-            border-top: 130px solid #dcd1c4;
-            border-left: 170px solid transparent;
-            border-right: 170px solid transparent;
-            transform-origin: top;
-            z-index: 5;
-            transition: transform 0.7s ease, z-index 0.2s ease 0.3s;
-        }
-
-        /* جيب الظرف السفلي والأجناب */
-        .envelope-pocket {
-            position: absolute;
-            bottom: 0; left: 0; width: 0; height: 0;
-            border-bottom: 130px solid #cfc2b3;
-            border-left: 170px solid #d4c7b8;
-            border-right: 170px solid #d4c7b8;
-            z-index: 4;
-            border-bottom-left-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
-
-        /* الكارت الداخلي الفخم */
-        .invitation-card {
-            position: absolute;
-            top: 10px; left: 10px;
-            width: 320px;
-            height: 220px;
-            background: #ffffff;
-            border-radius: 2px;
-            z-index: 3;
-            padding: 30px 20px;
-            box-sizing: border-box;
-            opacity: 0.95;
+            max-width: 415px; /* مقاس الموبايل المثالي */
+            height: 92vh;
+            margin: 4vh auto;
+            background: rgba(18, 22, 19, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
             overflow-y: auto;
             overflow-x: hidden;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s,
-                        width 0.6s ease 1s,
-                        height 0.6s ease 1s,
-                        left 0.6s ease 1s,
-                        top 0.6s ease 1s,
-                        opacity 0.3s ease;
-            scrollbar-width: none;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            scrollbar-width: none; /* إخفاء السكرول بار في الفايرفوكس */
         }
-        .invitation-card::-webkit-scrollbar { display: none; }
+        .app-container::-webkit-scrollbar { display: none; } /* إخفاء السكرول في الكروم */
 
-        /* ----------------------------------
-           الأنيميشن السحري عند الفتح (نفس شكل وتأثير الفيديو)
-        ---------------------------------- */
-        .main-wrapper.opened .open-btn {
+        /* --- 3. أنيميشن الظهور الفخم (Fade-in Reveal) --- */
+        .reveal-section {
             opacity: 0;
-            pointer-events: none;
-        }
-
-        /* الغطاء يفتح لفوق بالكامل */
-        .main-wrapper.opened .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 2;
-        }
-
-        /* الكارت يرتفع لأعلى الظرف ثم يتفرد ليملأ الشاشة بالطول كأنه تطبيق موبايل فخم */
-        .main-wrapper.opened .invitation-card {
-            transform: translateY(-140px);
-            z-index: 6;
-            opacity: 1;
-            width: 92vw;
-            max-width: 375px;
-            height: 85vh;
-            top: calc(50% - 42.5vh);
-            left: calc(50% - 46vw);
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             padding: 40px 24px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            text-align: center;
         }
 
-        /* ضبط السنتر في الشاشات الأعرض من الموبايل */
-        @media (min-width: 410px) {
-            .main-wrapper.opened .invitation-card {
-                left: calc(50% - 187.5px);
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* محتويات الكارت الداخلي وتنسيقها الأنيق */
-        .card-content {
-            opacity: 0;
-            transition: opacity 0.6s ease 1.3s;
-            text-align: center;
-        }
-        .main-wrapper.opened .card-content {
-            opacity: 1;
-        }
-
-        .wedding-names {
-            font-family: 'Cinzel', serif;
-            font-size: 1.85rem;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            font-weight: 400;
-        }
-
-        .families-text {
-            font-size: 0.85rem;
-            color: #8c9c8e;
-            letter-spacing: 2px;
+        /* --- 4. تنسيق النصوص والتفاصيل --- */
+        .header-tag {
+            font-size: 0.75rem;
             text-transform: uppercase;
-            margin-bottom: 25px;
+            letter-spacing: 5px;
+            color: var(--text-gold);
+            margin-bottom: 20px;
         }
 
-        .date-text {
-            font-size: 1.1rem;
-            color: #444;
-            margin-bottom: 5px;
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            line-height: 1.4;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .time-text {
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .date-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--text-gold);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .time-badge {
             font-size: 0.95rem;
-            color: #777;
-            margin-bottom: 30px;
+            color: var(--text-light);
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .divider {
-            border: 0;
-            border-top: 1px solid #e6eae4;
-            margin: 25px 10px;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
+            margin: 40px auto;
+            border: none;
         }
 
-        .countdown-title {
+        /* --- 5. كارت العداد التنازلي الزجاجي الفاخر --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 16px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
-            letter-spacing: 2px;
-            color: var(--primary-color);
+            letter-spacing: 3px;
+            color: var(--text-gold);
             text-transform: uppercase;
             margin-bottom: 20px;
         }
 
-        /* مربعات العداد التنازلي المنظمة والمظبوطة */
         .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 35px;
+            gap: 10px;
         }
 
-        .time-box {
-            background: #f8f9f7;
-            padding: 12px 4px;
-            border-radius: 6px;
-            border: 1px solid #edf0ec;
+        .timer-box {
+            position: relative;
         }
 
-        .time-box .digit {
+        .timer-box .number {
             display: block;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-light);
+            font-family: 'Cinzel', serif;
         }
 
-        .time-box .unit {
+        .timer-box .label {
             display: block;
-            font-size: 0.65rem;
-            color: #aaa;
+            font-size: 0.6rem;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
-        /* أقسام تفاصيل الفرح والخريطة */
+        /* --- 6. قسم مكان الفرح وزر الخريطة التفاعلي --- */
         .venue-section {
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
-        .venue-head {
+        .venue-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            color: var(--primary-color);
+            font-size: 1.05rem;
             letter-spacing: 2px;
-            margin-bottom: 6px;
+            color: var(--text-gold);
+            margin-bottom: 8px;
         }
 
-        .venue-detail {
+        .venue-name {
             font-size: 0.85rem;
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        /* الخريطة التفاعلية الحقيقية للفندق في القاهرة */
-        .map-box {
-            width: 100%;
-            height: 180px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            margin-bottom: 30px;
-        }
-
-        .invitation-body {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #555;
-            padding: 0 5px;
+            line-height: 1.6;
+            color: var(--text-muted);
             margin-bottom: 25px;
         }
 
-        .footer-note {
+        /* زر فخم للخريطة بديل للـ Iframe المكسور */
+        .map-button {
+            display: inline-block;
+            background: none;
+            border: 1px solid var(--text-gold);
+            color: var(--text-gold);
             font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .map-button:hover {
+            background: var(--text-gold);
+            color: #141815;
+            box-shadow: 0 5px 15px rgba(223, 186, 129, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .invitation-quote {
             font-size: 0.85rem;
-            color: #8c9c8e;
-            margin-top: 25px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 0 10px;
+            margin-top: 40px;
+        }
+
+        .footer-sig {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--text-gold);
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper" id="invitationWrapper">
-        <button class="open-btn" id="openActionBtn" onclick="openInvitation()">OPEN THE INVITATION</button>
-        
-        <div class="envelope-container">
-            <div class="envelope-flap"></div>
-            <div class="envelope-pocket"></div>
+    <div class="app-container">
+        <section class="reveal-section">
             
-            <div class="invitation-card">
-                <div class="card-content">
-                    
-                    <h1 class="wedding-names">Mohamed & Mariam</h1>
-                    <div class="families-text">Together with their families</div>
-                    
-                    <div class="date-text">Tuesday • September 1st 2026</div>
-                    <div class="time-text">6:00 PM</div>
-                    
-                    <hr class="divider">
-                    
-                    <div class="countdown-title">Countdown To Our Forever</div>
-                    <div class="countdown-grid">
-                        <div class="time-box"><span class="digit" id="daysBox">000</span><span class="unit">Days</span></div>
-                        <div class="time-box"><span class="digit" id="hoursBox">00</span><span class="unit">Hours</span></div>
-                        <div class="time-box"><span class="digit" id="minsBox">00</span><span class="unit">Mins</span></div>
-                        <div class="time-box"><span class="digit" id="secsBox">00</span><span class="unit">Secs</span></div>
-                    </div>
-                    
-                    <div class="venue-section">
-                        <div class="venue-head">Wedding Venue</div>
-                        <div class="venue-detail">Four Seasons Hotel Cairo At Nile Plaza<br>Garden City, Cairo, Egypt</div>
-                        
-                        <div class="map-box">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1d3453.974917544078!2d31.231245676295593!3d30.037568018318617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840ca04812301%3A0x33446c68e1a6c11c!2sFour%20Seasons%20Hotel%20Cairo%20at%20Nile%20Plaza!5e0!3m2!1sen!2seg!4v1716500000000!5m2!1sen!2seg" 
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <div style="font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--primary-color); margin-bottom: 12px; letter-spacing: 1px;">Invitation</div>
-                    <p class="invitation-body">
-                        With hearts full of love and joy, we invite you to celebrate our special day. Your presence will make this beautiful occasion even more meaningful and unforgettable.
-                    </p>
-                    
-                    <div class="footer-note">Join us for an elegant evening filled with love.</div>
-                    
+            <div class="header-tag">The Wedding Celebration</div>
+            
+            <h1 class="main-title">Mohamed<br>&<br>Mariam</h1>
+            <p class="subtitle">Together with their families</p>
+            
+            <div class="divider"></div>
+            
+            <div class="date-badge">Tuesday, September 1st, 2026</div>
+            <div class="time-badge">At Six O'clock In The Evening</div>
+            
+            <div class="glass-card">
+                <div class="card-title">Counting Down To Our Forever</div>
+                <div class="countdown-grid">
+                    <div class="timer-box"><span class="number" id="days">000</span><span class="label">Days</span></div>
+                    <div class="timer-box"><span class="number" id="hours">00</span><span class="label">Hours</span></div>
+                    <div class="timer-box"><span class="number" id="minutes">00</span><span class="label">Mins</span></div>
+                    <div class="timer-box"><span class="number" id="seconds">00</span><span class="label">Secs</span></div>
                 </div>
             </div>
-        </div>
+            
+            <div class="venue-section">
+                <div class="venue-title">Wedding Venue</div>
+                <p class="venue-name">Four Seasons Hotel Cairo At Nile Plaza<br>Garden City, Cairo, Egypt</p>
+                
+                <a href="https://maps.google.com/?q=Four+Seasons+Hotel+Cairo+At+Nile+Plaza" target="_blank" class="map-button">
+                    View Location On Map
+                </a>
+            </div>
+
+            <p class="invitation-quote">
+                "With hearts full of love and gratitude, we invite you to share with us the commencement of our new life together. Your presence is the greatest gift we could ask for."
+            </p>
+            
+            <div class="footer-sig">See You There</div>
+
+        </section>
     </div>
 
-    <audio id="bgAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+    <audio id="weddingTheme" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" loop></audio>
 
     <script>
-        function openInvitation() {
-            // تفعيل الأنيميشن ثلاثي الأبعاد وفرد الكارت بالطول الكامل
-            document.getElementById('invitationWrapper').classList.add('opened');
-            
-            // تشغيل الموسيقى
-            var audio = document.getElementById('bgAudio');
-            audio.play().catch(function(err) { console.log("المتصفح يمنع الأوتو بلاي حتى الضغط الفعلي."); });
-        }
+        // تشغيل الصوت بمجرد تفاعل المستخدم مع الشاشة لمنع قيود المتصفح
+        window.addEventListener('click', function() {
+            var audio = document.getElementById('weddingTheme');
+            audio.play().catch(function(e) { console.log("Audio playback initialized."); });
+        }, { once: true });
 
-        // سكريبت العداد التنازلي التلقائي الدقيق والمظبوط ليوم 1 سبتمبر 2026
-        const targetWeddingDate = new Date('September 1, 2026 18:00:00').getTime();
+        // العداد التنازلي المظبوط بالملي ثانية ليوم 1 سبتمبر 2026 الساعة 6 مساءً
+        const eventDate = new Date('September 1, 2026 18:00:00').getTime();
 
-        const updateTimer = setInterval(function() {
-            const nowTime = new Date().getTime();
-            const timeDifference = targetWeddingDate - nowTime;
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
 
-            const d = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-            const h = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            // حسابات الوقت
+            const d = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const h = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            document.getElementById('daysBox').innerText = d;
-            document.getElementById('hoursBox').innerText = h < 10 ? '0' + h : h;
-            document.getElementById('minsBox').innerText = m < 10 ? '0' + m : m;
-            document.getElementById('secsBox').innerText = s < 10 ? '0' + s : s;
+            // حقن الأرقام داخل المربعات الخاصة بها
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
 
-            if (timeDifference < 0) {
-                clearInterval(updateTimer);
-                document.getElementById('daysBox').innerText = '00';
-                document.getElementById('hoursBox').innerText = '00';
-                document.getElementById('minsBox').innerText = '00';
-                document.getElementById('secsBox').innerText = '00';
+            // لو الوقت خلص يصفر العداد تماماً
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
             }
         }, 1000);
     </script>
 </body>
 </html>
-
