@@ -3,538 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed & Mariam Wedding Invitation</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital@1&family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
+    <title>Wedding Invitation</title>
     <style>
-        :root {
-            --bg-overlay: rgba(255, 255, 255, 0.15);
-            --text-gold: #c4a46a;
-            --text-gold-dark: #8a6c35;
-            --text-dark: #333333;
-            --text-muted: #666666;
-            --card-bg: rgba(251, 249, 244, 0.93);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: #8b9275; /* اللون الزيتوني للخلفية */
+            font-family: 'Georgia', serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* الخلفية الموحدة والكاملة لكل الشاشات (صورة القصر والحديقة الملكية الفخمة) */
-        body {
-            min-height: 100vh;
-            background: #eae3d2 url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1200') center center no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            font-family: 'Montserrat', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            background: #fff;
+            position: relative;
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
 
-        /* فلتر مدمج خفيف لإعطاء تأثير الضبابية النعمة والراقية للخلفية خارج نطاق الكارت */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(244, 235, 217, 0.2);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            z-index: 1;
-        }
-
-        /* حاوية الأبعاد الموزونة لمحاكاة الموبايل بدقة واحترافية */
-        .app-container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 415px;
-            height: 92vh;
-            background: url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=600') center center no-repeat;
-            background-size: cover;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        /* حاوية بتلات الورد المتساقط التلقائي */
-        #petalContainer {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        /* --- واجهة الظرف المدمج المفتوح --- */
-        #envelopeOverlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
-        }
-
-        /* جسم الظرف السفلي الشفاف والناعم والمفتوح على شكل V من الأعلى */
-        .envelope-body {
-            position: relative;
-            width: 100%;
-            height: 40vh;
-            background: linear-gradient(to top, rgba(247, 244, 237, 0.95), rgba(247, 244, 237, 0.75));
-            box-shadow: 0 -15px 35px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding-top: 40px;
-        }
-
-        /* خط القطع العلوي للظرف المفتوح الحقيقي */
-        .envelope-body::before {
-            content: '';
-            position: absolute;
-            top: -50px; left: 0;
-            width: 0; height: 0;
-            border-left: 207.5px solid transparent;
-            border-right: 207.5px solid transparent;
-            border-bottom: 50px solid rgba(247, 244, 237, 0.75);
-        }
-        @media(max-width: 415px) {
-            .envelope-body::before {
-                border-left: 50vw solid transparent;
-                border-right: 50vw solid transparent;
-            }
-        }
-
-        /* الختم الشمعي الذهبي البارز ثلاثي الأبعاد المتقن بالنقوش */
-        .wax-seal {
-            position: absolute;
-            top: -45px;
-            z-index: 12;
-            width: 90px;
-            height: 90px;
-            background: radial-gradient(circle, #f5dca6 0%, #d4af37 50%, #aa8216 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 
-                        inset 0 2px 4px rgba(255,255,255,0.4),
-                        inset 0 -3px 6px rgba(0,0,0,0.2);
-            cursor: pointer;
-            animation: bounceSeal 3s infinite ease-in-out;
-            transition: transform 0.4s ease;
-        }
-        .wax-seal:hover {
-            transform: scale(1.05);
-        }
-
-        /* التفاصيل والنقوش الداخلية للختم الملكي */
-        .wax-seal-inner {
-            width: 74px;
-            height: 74px;
-            border-radius: 50%;
-            border: 1px dashed rgba(110, 84, 18, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .wax-seal-text {
-            font-family: 'Alex Brush', cursive;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #5c440b;
-            line-height: 1;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
-        }
-
-        .wax-seal-decor {
-            font-size: 0.5rem;
-            color: #5c440b;
-            margin-top: 2px;
-        }
-
-        /* نص زر الفتح الكلاسيكي السفلي */
-        .open-btn-text {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 5px;
-            color: var(--text-gold-dark);
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-top: 45px;
-            cursor: pointer;
-        }
-
-        @keyframes bounceSeal {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        /* التعديل السلس لحركة فتح واختفاء الظرف السينمائية */
-        .app-envelope-opened #envelopeOverlay {
-            transform: translateY(100%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* --- تأثير بتلات الورد المتساقط (بتلات حقيقية ناعمة) --- */
-        .rose-petal {
-            position: absolute;
-            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #fff6f0 70%, #f3dec9 100%);
-            border-radius: 70% 20% 70% 60%;
-            box-shadow: inset -1px -1px 3px rgba(0,0,0,0.05), 0 2px 5px rgba(0,0,0,0.04);
-            opacity: 0.9;
-            pointer-events: none;
-            animation: fallAndDrift linear infinite;
-        }
-
-        @keyframes fallAndDrift {
-            0% { transform: translateY(-5vh) rotate(0deg) scale(0.6); opacity: 0; }
-            15% { opacity: 0.95; }
-            90% { opacity: 0.9; }
-            100% { transform: translateY(100vh) rotate(360deg) scale(1.1) translateX(35px); opacity: 0; }
-        }
-
-        /* --- كارت الدعوة الداخلي الفاخر المستوحى من التصميم الاحترافي الأصلي --- */
-        .invitation-main-card {
+        /* خلفية القصر */
+        .bg-castle {
             width: 100%;
             height: 100%;
-            background-color: var(--card-bg);
-            overflow-y: auto;
-            padding: 45px 25px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease 0.2s, transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-            z-index: 4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: url('https://a123411.github.io/zafaf/castle.jpg') center/cover; /* استبدلها برابط صورتك */
+            position: absolute;
+            top: 0;
         }
 
-        .app-envelope-opened .invitation-main-card {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* إخفاء شريط التمرير للحفاظ على جمالية الكارت */
-        .invitation-main-card::-webkit-scrollbar {
-            width: 0px;
-        }
-
-        .card-tagline {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-
-        .card-arabic-welcome {
-            font-family: 'Amiri', serif;
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .card-names-title {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3.4rem;
-            color: var(--text-gold);
-            margin: 10px 0;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
-        }
-
-        .card-sub-family {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        .card-divider {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
-            margin: 20px 0;
-        }
-
-        .card-datetime-section {
-            margin: 15px 0;
-        }
-
-        .card-date {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .card-time {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        /* العداد التنازلي النظيف والمتناسق */
-        .countdown-section-wrapper {
+        /* الظرف (المثلث) */
+        .envelope-triangle {
+            position: absolute;
+            bottom: 0;
             width: 100%;
-            margin: 25px 0;
-        }
-
-        .countdown-header {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--text-gold-dark);
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .countdown-container-grid {
+            height: 300px;
+            background: #f4f1ea;
+            clip-path: polygon(0% 100%, 0% 100%, 100% 100%, 100% 100%, 50% 0%);
             display: flex;
             justify-content: center;
-            gap: 12px;
+            padding-top: 50px;
+            transition: clip-path 0.5s ease;
         }
 
-        .countdown-box {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            border-radius: 12px;
-            width: 72px;
-            padding: 12px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        /* الختم الشمعي */
+        .wax-seal {
+            width: 100px;
+            height: 100px;
+            background: url('https://a123411.github.io/zafaf/seal.png') center/contain no-repeat; /* استبدلها برابط الختم */
+            cursor: pointer;
+            z-index: 10;
         }
 
-        .countdown-box .val {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .countdown-box .lbl {
-            display: block;
-            font-size: 0.55rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-top: 3px;
-            letter-spacing: 1px;
-        }
-
-        /* تفاصيل القاعة وزر الموقع المباشر النظيف */
-        .venue-details-block {
-            margin: 25px 0;
-        }
-
-        .venue-lbl {
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            color: var(--text-gold-dark);
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .venue-description {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        /* زر الخريطة المباشر المتناسق هندسياً والآمن */
-        .venue-map-btn {
-            display: inline-block;
-            border: 1px solid var(--text-gold);
-            color: var(--text-gold-dark);
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
+        .open-text {
+            position: absolute;
+            bottom: 30px;
+            font-size: 14px;
             letter-spacing: 2px;
-            padding: 12px 32px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            background-color: transparent;
+            color: #555;
+            cursor: pointer;
         }
 
-        .venue-map-btn:hover {
-            background-color: var(--text-gold);
-            color: #ffffff;
-            box-shadow: 0 5px 15px rgba(196, 164, 106, 0.3);
-        }
-
-        .card-arabic-closing {
-            font-family: 'Amiri', serif;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: var(--text-dark);
-            margin-top: 20px;
-            padding: 0 10px;
-        }
-
-        .card-footer-note {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--text-gold-dark);
-            margin-top: 30px;
+        /* عند الفتح */
+        .opened .envelope-triangle {
+            clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%, 50% 100%);
         }
     </style>
 </head>
 <body>
 
-    <div id="petalContainer"></div>
-
-    <div class="app-container" id="mainApplicationContainer">
-        
-        <div id="envelopeOverlay">
-            <div class="envelope-body">
-                <div class="wax-seal" onclick="openWeddingInvitation()">
-                    <div class="wax-seal-inner">
-                        <div class="wax-seal-text">M&M</div>
-                        <div class="wax-seal-decor">✦</div>
-                    </div>
-                </div>
-                <div class="open-btn-text" onclick="openWeddingInvitation()">Open</div>
-            </div>
-        </div>
-
-        <div class="invitation-main-card">
-            <div class="card-tagline">The Wedding Celebration</div>
-            
-            <div class="card-arabic-welcome">بأريج الحب نلقاكم، وبمقدمكم تزداد فرحتنا</div>
-            
-            <h1 class="card-names-title">Mohamed & Mariam</h1>
-            
-            <p class="card-sub-family">Together with their families</p>
-            
-            <div class="card-divider"></div>
-            
-            <div class="card-datetime-section">
-                <div class="card-date">Tuesday, September 1st, 2026</div>
-                <div class="card-time">At Six O'clock In The Evening</div>
-            </div>
-            
-            <div class="countdown-section-wrapper">
-                <div class="countdown-header">Counting Down To Our Forever</div>
-                <div class="countdown-container-grid">
-                    <div class="countdown-box"><span class="val" id="d-val">000</span><span class="lbl">Days</span></div>
-                    <div class="countdown-box"><span class="val" id="h-val">00</span><span class="lbl">Hours</span></div>
-                    <div class="countdown-box"><span class="val" id="m-val">00</span><span class="lbl">Mins</span></div>
-                    <div class="countdown-box"><span class="val" id="s-val">00</span><span class="lbl">Secs</span></div>
-                </div>
-            </div>
-            
-            <div class="venue-details-block">
-                <div class="venue-lbl">Wedding Venue</div>
-                <p class="venue-description">Four Seasons Hotel Cairo At Nile Plaza<br>Garden City, Cairo, Egypt</p>
-                
-                <a href="https://maps.google.com/?q=Four+Seasons+Hotel+Cairo+At+Nile+Plaza" target="_blank" class="venue-map-btn">
-                    View Location On Map
-                </a>
-            </div>
-
-            <p class="card-arabic-closing">
-                تكتمل بهجتنا بمشاركتكم لنا لحظات العمر السعيدة، حضوركم يكلل ليلتنا بالفرح والسرور.
-            </p>
-            
-            <div class="card-footer-note">See You There</div>
+    <div class="phone-frame" id="card">
+        <div class="bg-castle"></div>
+        <div class="envelope-triangle" onclick="this.parentElement.classList.add('opened')">
+            <div class="wax-seal"></div>
+            <div class="open-text">Open</div>
         </div>
     </div>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            initializeRealisticPetals();
-            startEventCountdown();
-        });
-
-        // دالة حركة الفتح النظيفة والاختفاء التام للظرف السفلي
-        function openWeddingInvitation() {
-            document.body.classList.add('app-envelope-opened');
-        }
-
-        // نظام توليد البتلات الحقيقية المتساقطة المتناسقة مع أبعاد الموبايل
-        function initializeRealisticPetals() {
-            const container = document.getElementById('petalContainer');
-            const maxPetals = 25; // عدد موزون لعدم إبطاء المتصفح
-
-            for (let i = 0; i < maxPetals; i++) {
-                const petal = document.createElement('div');
-                petal.classList.add('rose-petal');
-                
-                // مقاسات عشوائية للبتلات لتبدو طبيعية
-                const size = Math.random() * 12 + 12;
-                petal.style.width = size + 'px';
-                petal.style.height = (size * 1.2) + 'px';
-                
-                petal.style.left = Math.random() * 100 + '%';
-                petal.style.animationDuration = Math.random() * 6 + 6 + 's';
-                petal.style.animationDelay = Math.random() * 6 + 's';
-                
-                // تدوير عشوائي لبعض البتلات لإعطاء مظهر طبيعي أثناء السقوط
-                if (Math.random() > 0.5) {
-                    petal.style.transform = 'scaleX(-1)';
-                }
-                
-                container.appendChild(petal);
-            }
-        }
-
-        // نظام حساب العداد التنازلي التلقائي الدقيق لتاريخ المناسبة السعيدة
-        function startEventCountdown() {
-            const weddingDate = new Date('September 1, 2026 18:00:00').getTime();
-            
-            const timerInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const timeLeft = weddingDate - now;
-
-                if (timeLeft < 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById('d-val').innerText = '00';
-                    document.getElementById('h-val').innerText = '00';
-                    document.getElementById('m-val').innerText = '00';
-                    document.getElementById('s-val').innerText = '00';
-                    return;
-                }
-
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-                document.getElementById('d-val').innerText = days;
-                document.getElementById('h-val').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('m-val').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('s-val').innerText = seconds < 10 ? '0' + seconds : seconds;
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
 
