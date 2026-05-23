@@ -11,10 +11,10 @@
 
     <style>
         :root {
-            --bg-olive: #6b7547; /* اللون الزيتوني الفخم المحيط بالكارت */
-            --bg-envelope: #f6f3eb; /* اللون الكريمي الفاخر للظرف والكارت */
-            --text-gold: #c5a872; /* الذهبي الملكي الدافئ */
-            --text-dark: #2f3625; /* الزيتوني الداكن للنصوص */
+            --bg-olive: #6b7547; /* اللون الأخضر الزيتوني المحيط بالكارت */
+            --bg-envelope: #fbf9f5; /* اللون الكريمي الفاتح للظرف */
+            --text-gold: #c5a872; /* الذهبي الدافئ للنصوص */
+            --text-dark: #2f3625; /* الزيتوني الداكن */
             --text-muted: #8a9281;
         }
 
@@ -36,94 +36,95 @@
             position: relative;
         }
 
-        /* --- 1. صفحة البداية السينمائية الموزونة بالـ CSS بالكامل (بدون روابط صور خارجية) --- */
+        /* --- 1. صفحة البداية الموزونة بالكامل (طبق الأصل من طلبك) --- */
         #introOverlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* خلفية كريمية ناعمة متدرجة تعطي إحساساً ضبابياً حالمًا يشبه روح القصر */
-            background: linear-gradient(to bottom, #f3ede2 0%, #eaddca 100%);
+            background: linear-gradient(to bottom, #f5f2eb 0%, #e8e2d5 100%);
             z-index: 999;
             display: flex;
             justify-content: center;
-            align-items: flex-end; 
+            align-items: flex-end; /* يرتكز الظرف في الأسفل */
             transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* رسم خلفية الظرف السفلي المفتوح (V-Shape مقلوب) بدقة متناهية */
+        /* حاوية الظرف السفلي المفتوح على شكل V لتفادي أي قطع في الختم */
         .envelope-bottom {
             position: relative;
             z-index: 3;
             width: 100%;
             max-width: 415px;
-            height: 42vh; 
-            background: linear-gradient(135deg, #fbf9f5 0%, var(--bg-envelope) 70%, #ebdcc5 100%);
-            clip-path: polygon(0 42%, 50% 0, 100% 42%, 100% 100%, 0 100%);
-            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.15);
+            height: 38vh; /* ارتفاع متناسق يغطي الثلث السفلي */
+            background: linear-gradient(to bottom, #ffffff 0%, var(--bg-envelope) 100%);
+            /* رسم شكل الـ V المفتوح من الأعلى بدقة لمنع تداخل الحواف */
+            clip-path: polygon(0 35%, 50% 0, 100% 35%, 100% 100%, 0 100%);
+            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 50px;
+            padding-top: 60px;
         }
 
-        /* الختم الشمعي الذهبي البارز جداً (3D Wax Seal) المصمم بالكود */
+        /* الختم الشمعي الذهبي البارز ثلاثي الأبعاد المكتمل وبدون أي قطع */
         .wax-seal {
             position: absolute;
-            top: -32px; 
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, #fce4ba 0%, #cca96e 50%, #9c7b43 85%, #6e5427 100%);
+            top: -20px; /* مكان موزون فوق زاوية الـ V تماماً ليظهر كاملاً */
+            width: 110px;
+            height: 110px;
+            background: radial-gradient(circle, #fde7c4 0%, #cca96e 55%, #9c7b43 85%, #6e5427 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 14px 35px rgba(69, 53, 23, 0.65), 
-                        inset 0 4px 6px rgba(255,255,255,0.6),
-                        inset 0 -6px 14px rgba(0,0,0,0.35);
+            box-shadow: 0 12px 28px rgba(69, 53, 23, 0.5), 
+                        inset 0 3px 6px rgba(255,255,255,0.5),
+                        inset 0 -5px 12px rgba(0,0,0,0.3);
             cursor: pointer;
             animation: pulseSeal 2.5s infinite ease-in-out;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s ease;
+            z-index: 4;
         }
         
         .wax-seal:hover {
-            transform: scale(1.06);
+            transform: scale(1.05);
         }
 
-        /* تفاصيل الحفر الملكي الداخلي الفاخر لـ M&M والورد */
+        /* حفر الشعار الفخم الداخلي M&M */
         .wax-seal::after {
             content: 'M&M';
             font-family: 'Alex Brush', cursive;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #4a3817;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
-            border: 2px dashed rgba(74, 56, 23, 0.4);
-            width: 100px;
-            height: 100px;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.25);
+            border: 2px dashed rgba(74, 56, 23, 0.35);
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 5px 12px rgba(0,0,0,0.3);
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.25);
             font-weight: bold;
         }
 
-        /* زخرفة ورد صغيرة أنيقة أسفل الحروف داخل الختم */
+        /* الوردة الصغيرة الزخرفية داخل الختم الشمعي */
         .wax-seal::before {
             content: '✿';
             position: absolute;
-            bottom: 18px;
-            font-size: 0.65rem;
-            color: rgba(74, 56, 23, 0.65);
+            bottom: 16px;
+            font-size: 0.6rem;
+            color: rgba(74, 56, 23, 0.6);
         }
 
-        /* نصوص الزر الكلاسيكي الرفيع Open */
+        /* كلمة Open السفلية الأنيقة */
         .open-btn-text {
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 5px;
             color: #554831;
             text-transform: uppercase;
-            margin-top: 100px;
+            margin-top: 85px;
             font-weight: 500;
             cursor: pointer;
             transition: color 0.3s;
@@ -133,19 +134,19 @@
         }
 
         @keyframes pulseSeal {
-            0% { transform: scale(1); box-shadow: 0 14px 35px rgba(69, 53, 23, 0.55); }
-            50% { transform: scale(1.04); box-shadow: 0 20px 40px rgba(69, 53, 23, 0.7); }
-            100% { transform: scale(1); box-shadow: 0 14px 35px rgba(69, 53, 23, 0.55); }
+            0% { transform: scale(1); box-shadow: 0 12px 28px rgba(69, 53, 23, 0.45); }
+            50% { transform: scale(1.03); box-shadow: 0 16px 32px rgba(69, 53, 23, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 12px 28px rgba(69, 53, 23, 0.45); }
         }
 
-        /* أنيميشن الاختفاء الانسيابي للأسفل عند النقر للفتح */
+        /* تأثير النزول والاختفاء السلس للأسفل عند فتح الكارت */
         .fade-out {
             opacity: 0;
             pointer-events: none;
-            transform: translateY(60px);
+            transform: translateY(100%);
         }
 
-        /* --- 2. حاوية كارت الدعوة الداخلي الموزون للموبايل --- */
+        /* --- 2. حاوية بطاقة الدعوة الداخلية الموزونة للموبايل --- */
         .app-container {
             position: relative;
             z-index: 2;
@@ -162,7 +163,7 @@
         }
         .app-container::-webkit-scrollbar { display: none; }
 
-        /* إطار داخلي ذهبي نحيف وراقٍ جداً للبطاقة */
+        /* إطار داخلي مذهب راقٍ ونحيف للبطاقة */
         .app-container::before {
             content: '';
             position: absolute;
@@ -172,32 +173,25 @@
             pointer-events: none;
         }
 
-        /* --- 3. حاوية تساقط الورد والبتلات الناعمة بالكود الداخلي --- */
+        /* --- 3. تأثير تساقط البتلات بالكود المستقر --- */
         .petal {
             position: absolute;
             background-color: #fff;
-            border-radius: 50% 0 50% 50%; /* شكل يحاكي بتلات الورد الطبيعية بدقة */
-            opacity: 0.8;
+            border-radius: 50% 0 50% 50%; 
+            opacity: 0.85;
             pointer-events: none;
             z-index: 5;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
             animation: fall linear infinite;
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(-40px) rotate(0deg) scale(0.6);
-                opacity: 0;
-            }
+            0% { transform: translateY(-40px) rotate(0deg) scale(0.6); opacity: 0; }
             15% { opacity: 0.85; }
             90% { opacity: 0.85; }
-            100% {
-                transform: translateY(105vh) rotate(360deg) scale(1.1) translateX(50px);
-                opacity: 0;
-            }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1.1) translateX(50px); opacity: 0; }
         }
 
-        /* --- 4. تنسيقات نصوص وجماليات كارت الدعوة الملكي --- */
+        /* --- 4. نصوص الكارت وترتيبها الفخم الملكي --- */
         .reveal-section {
             padding: 65px 24px;
             text-align: center;
@@ -305,7 +299,7 @@
             margin-top: 4px;
         }
 
-        /* قسم تفاصيل اللوكيشن النظيف والمستقر */
+        /* تفاصيل ومكان القاعة الخريطة */
         .venue-section {
             margin: 35px 0;
         }
@@ -417,7 +411,7 @@
             <div class="venue-section">
                 <div class="venue-title">Wedding Venue</div>
                 <p class="venue-name">Four Seasons Hotel Cairo At Nile Plaza<br>Garden City, Cairo, Egypt</p>
-                <a href="https://maps.google.com" target="_blank" class="map-button">Map</a>
+                <a href="https://maps.google.com/?q=Four+Seasons+Hotel+Cairo+At+Nile+Plaza" target="_blank" class="map-button">Map</a>
             </div>
 
             <p class="arabic-quote">
@@ -430,18 +424,17 @@
     </div>
 
     <script>
-        // تشغيل تأثير البتلات تلقائياً فور فتح الصفحة ليعطي روح الفرح
         window.onload = function() {
             createPetals();
         };
 
-        // دالة فتح الظرف وانزلاقه لأسفل بسلاسة
+        // دالة فتح الظرف السينمائية وانزلاقه لأسفل بسلاسة تامة للخارج
         function openInvitation() {
             const overlay = document.getElementById('introOverlay');
             overlay.classList.add('fade-out');
         }
 
-        // --- نظام تساقط بتلات الورد النقي باستخدام الكود للحفاظ على سرعة الصفحة واستقرارها ---
+        // نظام تساقط بتلات الورد المستقر بالكود
         function createPetals() {
             const container = document.getElementById('petalContainer');
             const totalPetals = 35; 
@@ -450,14 +443,11 @@
                 const petal = document.createElement('div');
                 petal.classList.add('petal');
                 
-                // أحجام متباينة وتدرج خفيف لتبدو البتلات طبيعية في الهبوط
                 const size = Math.random() * 15 + 10; 
                 petal.style.width = size + 'px';
                 petal.style.height = (size * 1.2) + 'px';
                 
-                // زوايا تدرج البتلات بلون كريمي وأبيض دافئ
                 petal.style.background = 'linear-gradient(135deg, #ffffff 0%, #fff5ea 80%, #f3ede2 100%)';
-                
                 petal.style.left = Math.random() * 100 + 'vw'; 
                 petal.style.animationDuration = Math.random() * 5 + 6 + 's'; 
                 petal.style.animationDelay = Math.random() * 8 + 's'; 
@@ -470,7 +460,7 @@
             }
         }
 
-        // --- نظام العداد التنازلي التلقائي المستقر ---
+        // نظام العداد التنازلي التلقائي الدقيق لعام 2026
         const eventDate = new Date('September 1, 2026 18:00:00').getTime();
         const timerInterval = setInterval(function() {
             const now = new Date().getTime();
@@ -497,4 +487,3 @@
     </script>
 </body>
 </html>
-
