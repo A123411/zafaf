@@ -11,11 +11,11 @@
 
     <style>
         :root {
-            --bg-olive: #6b7547; /* الأخضر الزيتوني الفخم للجوانب والخلفية البعيدة */
-            --bg-envelope: #f3ede2; /* اللون الكريمي العتيق المعتمد للظرف */
-            --text-gold: #bda06a; /* الذهبي الملكي الدافئ */
-            --text-dark: #2f3625; /* الزيتوني الداكن للنصوص لقراءة مريحة */
-            --text-muted: #7a8271;
+            --bg-olive: #6b7547; /* اللون الزيتوني الفخم المحيط بالكارت */
+            --bg-envelope: #f6f3eb; /* اللون الكريمي الفاخر للظرف والكارت */
+            --text-gold: #c5a872; /* الذهبي الملكي الدافئ */
+            --text-dark: #2f3625; /* الزيتوني الداكن للنصوص */
+            --text-muted: #8a9281;
         }
 
         * {
@@ -36,63 +36,50 @@
             position: relative;
         }
 
-        /* --- 1. صفحة البداية السينمائية (طبق الأصل من الفيديو) --- */
+        /* --- 1. صفحة البداية السينمائية الموزونة بالـ CSS بالكامل (بدون روابط صور خارجية) --- */
         #introOverlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* صورة قصر كلاسيكي فخم محاط بالورود البيضاء نفس ثيم الفيديو بالظبط */
-            background: #f4f1ea url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1200') center center no-repeat;
-            background-size: cover;
+            /* خلفية كريمية ناعمة متدرجة تعطي إحساساً ضبابياً حالمًا يشبه روح القصر */
+            background: linear-gradient(to bottom, #f3ede2 0%, #eaddca 100%);
             z-index: 999;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* لمحاكاة خروج الظرف من الأسفل */
+            align-items: flex-end; 
             transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* الفلتر والضبابية الناعمة فوق القصر لجعل المشهد حالم */
-        #introOverlay::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(1px);
-            -webkit-backdrop-filter: blur(1px);
-            z-index: 1;
-        }
-
-        /* مجسم الظرف الكريمي السفلي المفتوح على شكل V مقلوب */
+        /* رسم خلفية الظرف السفلي المفتوح (V-Shape مقلوب) بدقة متناهية */
         .envelope-bottom {
             position: relative;
             z-index: 3;
             width: 100%;
             max-width: 415px;
-            height: 40vh; /* يغطي الجزء السفلي من الشاشة نفس الفيديو */
-            background: linear-gradient(35deg, #eaddca 0%, var(--bg-envelope) 60%, #fff 100%);
-            clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%);
-            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.12);
+            height: 42vh; 
+            background: linear-gradient(135deg, #fbf9f5 0%, var(--bg-envelope) 70%, #ebdcc5 100%);
+            clip-path: polygon(0 42%, 50% 0, 100% 42%, 100% 100%, 0 100%);
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.15);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.4);
+            padding-top: 50px;
         }
 
-        /* الختم الشمعي الذهبي الملكي ثلاثي الأبعاد المتقن والبارز */
+        /* الختم الشمعي الذهبي البارز جداً (3D Wax Seal) المصمم بالكود */
         .wax-seal {
             position: absolute;
-            top: -30px; /* مرتكز في منتصف زاوية الـ V تماماً */
-            width: 115px;
-            height: 115px;
-            background: radial-gradient(circle, #fce0ad 0%, #c4a46a 50%, #91733b 90%, #614a20 100%);
+            top: -32px; 
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #fce4ba 0%, #cca96e 50%, #9c7b43 85%, #6e5427 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 12px 30px rgba(74, 58, 27, 0.6), 
-                        inset 0 3px 6px rgba(255,255,255,0.5),
-                        inset 0 -5px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 14px 35px rgba(69, 53, 23, 0.65), 
+                        inset 0 4px 6px rgba(255,255,255,0.6),
+                        inset 0 -6px 14px rgba(0,0,0,0.35);
             cursor: pointer;
             animation: pulseSeal 2.5s infinite ease-in-out;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -102,41 +89,41 @@
             transform: scale(1.06);
         }
 
-        /* حفر الشعار M&M والورد الداخلي الفاخر الـ Vintage */
+        /* تفاصيل الحفر الملكي الداخلي الفاخر لـ M&M والورد */
         .wax-seal::after {
             content: 'M&M';
             font-family: 'Alex Brush', cursive;
-            font-size: 2.1rem;
-            color: #493716;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.25);
-            border: 2px dashed rgba(73, 55, 22, 0.35);
-            width: 95px;
-            height: 95px;
+            font-size: 2.2rem;
+            color: #4a3817;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+            border: 2px dashed rgba(74, 56, 23, 0.4);
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 4px 10px rgba(0,0,0,0.25);
+            box-shadow: inset 0 5px 12px rgba(0,0,0,0.3);
             font-weight: bold;
         }
 
-        /* إضافة لمسة زخرفة ورد خفيفة داخل الختم الشمعي */
+        /* زخرفة ورد صغيرة أنيقة أسفل الحروف داخل الختم */
         .wax-seal::before {
             content: '✿';
             position: absolute;
-            bottom: 16px;
-            font-size: 0.6rem;
-            color: rgba(73, 55, 22, 0.6);
+            bottom: 18px;
+            font-size: 0.65rem;
+            color: rgba(74, 56, 23, 0.65);
         }
 
-        /* كلمة Open السفلية بالخط الرفيع الكلاسيكي */
+        /* نصوص الزر الكلاسيكي الرفيع Open */
         .open-btn-text {
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 5px;
             color: #554831;
             text-transform: uppercase;
-            margin-top: 90px;
+            margin-top: 100px;
             font-weight: 500;
             cursor: pointer;
             transition: color 0.3s;
@@ -146,19 +133,19 @@
         }
 
         @keyframes pulseSeal {
-            0% { transform: scale(1); box-shadow: 0 12px 30px rgba(74, 58, 27, 0.5); }
-            50% { transform: scale(1.04); box-shadow: 0 18px 35px rgba(74, 58, 27, 0.7); }
-            100% { transform: scale(1); box-shadow: 0 12px 30px rgba(74, 58, 27, 0.5); }
+            0% { transform: scale(1); box-shadow: 0 14px 35px rgba(69, 53, 23, 0.55); }
+            50% { transform: scale(1.04); box-shadow: 0 20px 40px rgba(69, 53, 23, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 14px 35px rgba(69, 53, 23, 0.55); }
         }
 
-        /* أنيميشن التلاشي والنزول للخارج عند الفتح */
+        /* أنيميشن الاختفاء الانسيابي للأسفل عند النقر للفتح */
         .fade-out {
             opacity: 0;
             pointer-events: none;
-            transform: translateY(50px);
+            transform: translateY(60px);
         }
 
-        /* --- 2. الحاوية الأساسية للكارت الداخلي الموزون للموبايل --- */
+        /* --- 2. حاوية كارت الدعوة الداخلي الموزون للموبايل --- */
         .app-container {
             position: relative;
             z-index: 2;
@@ -166,7 +153,7 @@
             max-width: 415px;
             height: 92vh;
             margin: 4vh auto;
-            background: #faf7f2;
+            background: #faf8f5;
             border-radius: 24px;
             overflow-y: auto;
             overflow-x: hidden;
@@ -175,41 +162,42 @@
         }
         .app-container::-webkit-scrollbar { display: none; }
 
-        /* إطار داخلي ذهبي مذهب ونحيف للكارت */
+        /* إطار داخلي ذهبي نحيف وراقٍ جداً للبطاقة */
         .app-container::before {
             content: '';
             position: absolute;
             top: 16px; left: 16px; right: 16px; bottom: 16px;
-            border: 1px solid rgba(189, 160, 106, 0.2);
+            border: 1px solid rgba(197, 168, 114, 0.25);
             border-radius: 14px;
             pointer-events: none;
         }
 
-        /* --- 3. تأثير تساقط بتلات الورد الأبيض الناعم الحقيقي --- */
+        /* --- 3. حاوية تساقط الورد والبتلات الناعمة بالكود الداخلي --- */
         .petal {
             position: absolute;
-            background-image: url('https://i.postimg.co/NfD6Yg7C/rose-petal.png'); /* بتلة بيضاء طبيعية نقية */
-            background-size: contain;
-            background-repeat: no-repeat;
+            background-color: #fff;
+            border-radius: 50% 0 50% 50%; /* شكل يحاكي بتلات الورد الطبيعية بدقة */
+            opacity: 0.8;
             pointer-events: none;
             z-index: 5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
             animation: fall linear infinite;
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-40px) rotate(0deg) scale(0.7);
+                transform: translateY(-40px) rotate(0deg) scale(0.6);
                 opacity: 0;
             }
-            15% { opacity: 0.9; }
-            90% { opacity: 0.9; }
+            15% { opacity: 0.85; }
+            90% { opacity: 0.85; }
             100% {
-                transform: translateY(105vh) rotate(360deg) scale(1.1) translateX(60px);
+                transform: translateY(105vh) rotate(360deg) scale(1.1) translateX(50px);
                 opacity: 0;
             }
         }
 
-        /* --- 4. تنسيق وترتيب نصوص كارت الدعوة الملكي --- */
+        /* --- 4. تنسيقات نصوص وجماليات كارت الدعوة الملكي --- */
         .reveal-section {
             padding: 65px 24px;
             text-align: center;
@@ -276,14 +264,13 @@
             font-weight: 500;
         }
 
-        /* كارت العداد التنازلي الكلاسيكي المتناسق */
+        /* العداد التنازلي الكلاسيكي */
         .countdown-card {
             background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(189, 160, 106, 0.2);
+            border: 1px solid rgba(197, 168, 114, 0.2);
             border-radius: 12px;
             padding: 24px 10px;
             margin: 35px 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.01);
         }
 
         .card-title {
@@ -318,7 +305,7 @@
             margin-top: 4px;
         }
 
-        /* تفاصيل المكان واللوكيشن المباشر والأنيق */
+        /* قسم تفاصيل اللوكيشن النظيف والمستقر */
         .venue-section {
             margin: 35px 0;
         }
@@ -368,7 +355,7 @@
             background: var(--text-gold);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(189, 160, 106, 0.35);
+            box-shadow: 0 6px 18px rgba(197, 168, 114, 0.35);
         }
 
         .arabic-quote {
@@ -443,33 +430,36 @@
     </div>
 
     <script>
-        // تشغيل تساقط الورد تلقائياً فور تحميل الصفحة ليعطي روح الفيديو من أول ثانية
+        // تشغيل تأثير البتلات تلقائياً فور فتح الصفحة ليعطي روح الفرح
         window.onload = function() {
             createPetals();
         };
 
-        // دالة فتح الظرف السينمائية واختفاء الواجهة بسلاسة
+        // دالة فتح الظرف وانزلاقه لأسفل بسلاسة
         function openInvitation() {
             const overlay = document.getElementById('introOverlay');
             overlay.classList.add('fade-out');
         }
 
-        // --- نظام تساقط بتلات الورد المتناسق السلس جداً على الهواتف ---
+        // --- نظام تساقط بتلات الورد النقي باستخدام الكود للحفاظ على سرعة الصفحة واستقرارها ---
         function createPetals() {
             const container = document.getElementById('petalContainer');
-            const totalPetals = 30; // عدد موزون ومثالي جداً للأداء
+            const totalPetals = 35; 
             
             for (let i = 0; i < totalPetals; i++) {
                 const petal = document.createElement('div');
                 petal.classList.add('petal');
                 
-                // أحجام متباينة تعطي بعداً واقعياً (3D View)
-                const size = Math.random() * 18 + 12; 
+                // أحجام متباينة وتدرج خفيف لتبدو البتلات طبيعية في الهبوط
+                const size = Math.random() * 15 + 10; 
                 petal.style.width = size + 'px';
-                petal.style.height = size + 'px';
+                petal.style.height = (size * 1.2) + 'px';
+                
+                // زوايا تدرج البتلات بلون كريمي وأبيض دافئ
+                petal.style.background = 'linear-gradient(135deg, #ffffff 0%, #fff5ea 80%, #f3ede2 100%)';
                 
                 petal.style.left = Math.random() * 100 + 'vw'; 
-                petal.style.animationDuration = Math.random() * 5 + 6 + 's'; // سرعة هبوط انسيابية وهادئة
+                petal.style.animationDuration = Math.random() * 5 + 6 + 's'; 
                 petal.style.animationDelay = Math.random() * 8 + 's'; 
                 
                 if(Math.random() > 0.5) {
@@ -480,7 +470,7 @@
             }
         }
 
-        // --- سكريبت العداد التنازلي التلقائي الدقيق ---
+        // --- نظام العداد التنازلي التلقائي المستقر ---
         const eventDate = new Date('September 1, 2026 18:00:00').getTime();
         const timerInterval = setInterval(function() {
             const now = new Date().getTime();
@@ -507,3 +497,4 @@
     </script>
 </body>
 </html>
+
