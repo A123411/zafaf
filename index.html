@@ -6,334 +6,394 @@
     <title>Mohamed & Mariam - Wedding Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* إعدادات الخلفية العامة - صورة القصر والورد */
-        body {
+        :root {
+            --bg-color: #f3f5f0;
+            --primary-color: #4a5d4e;
+            --text-color: #333;
+            --accent-color: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* هنا هتحط رابط صورة القصر والورد الخلفية */
-            background: url('https://images.unsplash.com/photo-1546032996-6df5b30833a3?q=80&w=1000') center center no-repeat;
+            background: #e2e7df url('https://images.unsplash.com/photo-1546032996-6df5b30833a3?q=80&w=1000') center center no-repeat;
             background-size: cover;
             font-family: 'Playfair Display', serif;
             overflow: hidden;
             position: relative;
         }
 
-        /* طبقة ضبابية خفيفة عشان تخلي الخلفية هادية زي الفيديو */
+        /* طبقة ناعمة عشان تدي روح الـ Watercolor للخلفية */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(244, 246, 240, 0.45);
-            backdrop-filter: blur(2px);
+            background: rgba(243, 245, 240, 0.65);
+            backdrop-filter: blur(3px);
             z-index: 1;
         }
 
-        /* حاوية الشغل كله */
-        .main-container {
+        .main-wrapper {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 420px;
-            height: 90vh;
+            max-width: 400px;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            perspective: 1000px;
         }
 
-        /* زر الفتح الشفاف الفخم المكتوب في الهوا */
+        /* زر OPEN الفخم اللي في الهوا */
         .open-btn {
+            position: absolute;
+            top: 45%;
             background: none;
             border: none;
-            color: #4a5d4e;
+            color: var(--primary-color);
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
+            font-size: 1.15rem;
+            font-weight: 500;
+            letter-spacing: 4px;
             cursor: pointer;
-            padding: 15px 30px;
-            position: absolute;
-            top: 35%;
             z-index: 10;
             transition: all 0.4s ease;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
         }
+        
         .open-btn:hover {
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             color: #2c3a2f;
+            transform: scale(1.05);
         }
 
-        /* حاوية المغلف والجواب */
-        .envelope-box {
+        /* حاوية الظرف الكلي */
+        .envelope-container {
             position: relative;
+            width: 340px;
+            height: 240px;
+            background: #e8dfd5;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border-radius: 4px;
+            perspective: 1500px;
+            transition: all 0.5s ease;
+        }
+
+        /* غطاء الظرف اللي بيفتح لافوق */
+        .envelope-flap {
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 0;
+            border-top: 130px solid #dcd1c4;
+            border-left: 170px solid transparent;
+            border-right: 170px solid transparent;
+            transform-origin: top;
+            z-index: 5;
+            transition: transform 0.7s ease, z-index 0.2s ease 0.3s;
+        }
+
+        /* جيب الظرف السفلي والأجناب */
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0; left: 0; width: 0; height: 0;
+            border-bottom: 130px solid #cfc2b3;
+            border-left: 170px solid #d4c7b8;
+            border-right: 170px solid #d4c7b8;
+            z-index: 4;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* الكارت الداخلي الفخم */
+        .invitation-card {
+            position: absolute;
+            top: 10px; left: 10px;
             width: 320px;
             height: 220px;
-            transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: 50px;
-        }
-
-        /* صورة المغلف أو الجواب الحقيقي المغلق */
-        .envelope-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            /* حط هنا رابط صورة المغلف المقفول */
-            background: #dcd1c4 url('https://www.transparenttextures.com/patterns/linen-paper.png');
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 4;
-            transform-origin: top;
-            transition: transform 0.8s ease, z-index 0.2s ease 0.4s;
-        }
-
-        /* قلب كرت الدعوة اللي هيطلع ويتفرد */
-        .wedding-card {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 300px;
-            height: 200px;
             background: #ffffff;
             border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05);
-            z-index: 2;
-            padding: 25px;
+            z-index: 3;
+            padding: 30px 20px;
             box-sizing: border-box;
+            opacity: 0.95;
             overflow-y: auto;
             overflow-x: hidden;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, 
-                        width 0.6s ease 0.9s, 
-                        height 0.6s ease 0.9s, 
-                        left 0.6s ease 0.9s, 
-                        top 0.6s ease 0.9s;
-            
-            /* تظبيط شكل السكرول بار عشان يكون مخفي وناعم */
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s,
+                        width 0.6s ease 1s,
+                        height 0.6s ease 1s,
+                        left 0.6s ease 1s,
+                        top 0.6s ease 1s,
+                        opacity 0.3s ease;
             scrollbar-width: none;
         }
-        .wedding-card::-webkit-scrollbar { display: none; }
+        .invitation-card::-webkit-scrollbar { display: none; }
 
         /* ----------------------------------
-           حالة الانيميشن بعد الضغط على الفتح
+           الأنيميشن السحري عند الفتح (نفس شكل وتأثير الفيديو)
         ---------------------------------- */
-        .main-container.is-opened .open-btn {
+        .main-wrapper.opened .open-btn {
             opacity: 0;
             pointer-events: none;
         }
 
-        /* غطاء الجواب يفتح لفوق ويموت زاوية الرؤية */
-        .main-container.is-opened .envelope-front {
-            transform: rotateX(160deg);
-            z-index: 1;
+        /* الغطاء يفتح لفوق بالكامل */
+        .main-wrapper.opened .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 2;
         }
 
-        /* الكارت يرتفع لفوق ثم يتفرد لملء الشاشة بالطول كأنه موبايل آب */
-        .main-container.is-opened .wedding-card {
-            transform: translateY(-150px);
-            z-index: 5;
+        /* الكارت يرتفع لأعلى الظرف ثم يتفرد ليملأ الشاشة بالطول كأنه تطبيق موبايل فخم */
+        .main-wrapper.opened .invitation-card {
+            transform: translateY(-140px);
+            z-index: 6;
+            opacity: 1;
             width: 92vw;
-            max-width: 390px;
-            height: 82vh;
-            top: calc(50% - 41vh);
+            max-width: 375px;
+            height: 85vh;
+            top: calc(50% - 42.5vh);
             left: calc(50% - 46vw);
-            padding: 40px 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            padding: 40px 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        @media (min-width: 430px) {
-            .main-container.is-opened .wedding-card {
-                left: calc(50% - 195px);
+        /* ضبط السنتر في الشاشات الأعرض من الموبايل */
+        @media (min-width: 410px) {
+            .main-wrapper.opened .invitation-card {
+                left: calc(50% - 187.5px);
             }
         }
 
-        /* ----------------------------------
-           تنسيق محتويات الصفحة الداخلية (نفس الفيديو)
-        ---------------------------------- */
+        /* محتويات الكارت الداخلي وتنسيقها الأنيق */
         .card-content {
             opacity: 0;
             transition: opacity 0.6s ease 1.3s;
             text-align: center;
         }
-        .main-container.is-opened .card-content {
+        .main-wrapper.opened .card-content {
             opacity: 1;
         }
 
-        .names-title {
+        .wedding-names {
             font-family: 'Cinzel', serif;
-            color: #3e4e43;
-            font-size: 1.8rem;
-            margin: 0 0 5px 0;
+            font-size: 1.85rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
             font-weight: 400;
         }
-        .sub-text {
+
+        .families-text {
             font-size: 0.85rem;
-            color: #8a9a86;
+            color: #8c9c8e;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
-        .wedding-date {
+
+        .date-text {
             font-size: 1.1rem;
-            color: #555;
-            letter-spacing: 1px;
-            margin: 15px 0;
-        }
-
-        /* أرقام العداد التنازلي زي شكل الفيديو بالظبط */
-        .countdown-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin: 40px 0;
-        }
-        .count-box {
-            background: #f7f8f6;
-            padding: 12px 5px;
-            border-radius: 6px;
-            border: 1px solid #eaece8;
-        }
-        .count-box .num {
-            display: block;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #4a5d4e;
-        }
-        .count-box .label {
-            font-size: 0.65rem;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 3px;
-        }
-
-        /* مكان الفرح والخريطة والكلام اللي تحت */
-        .venue-section {
-            margin-top: 40px;
-        }
-        .venue-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: #3e4e43;
-            letter-spacing: 2px;
+            color: #444;
             margin-bottom: 5px;
         }
-        .venue-name {
-            font-size: 0.9rem;
-            color: #666;
-            margin: 5px 0 20px 0;
+
+        .time-text {
+            font-size: 0.95rem;
+            color: #777;
+            margin-bottom: 30px;
         }
 
-        /* الخريطة الذكية */
-        .map-wrapper {
+        .divider {
+            border: 0;
+            border-top: 1px solid #e6eae4;
+            margin: 25px 10px;
+        }
+
+        .countdown-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* مربعات العداد التنازلي المنظمة والمظبوطة */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 35px;
+        }
+
+        .time-box {
+            background: #f8f9f7;
+            padding: 12px 4px;
+            border-radius: 6px;
+            border: 1px solid #edf0ec;
+        }
+
+        .time-box .digit {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .time-box .unit {
+            display: block;
+            font-size: 0.65rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* أقسام تفاصيل الفرح والخريطة */
+        .venue-section {
+            margin-top: 30px;
+        }
+
+        .venue-head {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .venue-detail {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* الخريطة التفاعلية الحقيقية للفندق في القاهرة */
+        .map-box {
             width: 100%;
             height: 180px;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             margin-bottom: 30px;
         }
 
-        .invitation-text {
+        .invitation-body {
             font-size: 0.9rem;
-            line-height: 1.8;
+            line-height: 1.7;
             color: #555;
-            padding: 0 10px;
-            margin-bottom: 20px;
+            padding: 0 5px;
+            margin-bottom: 25px;
+        }
+
+        .footer-note {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: #8c9c8e;
+            margin-top: 25px;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container" id="mainWrapper">
-        <button class="open-btn" id="triggerBtn" onclick="startInvitation()">OPEN THE INVITATION</button>
+    <div class="main-wrapper" id="invitationWrapper">
+        <button class="open-btn" id="openActionBtn" onclick="openInvitation()">OPEN THE INVITATION</button>
         
-        <div class="envelope-box">
-            <div class="envelope-front">
-                </div>
+        <div class="envelope-container">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
             
-            <div class="wedding-card">
+            <div class="invitation-card">
                 <div class="card-content">
                     
-                    <h1 class="names-title">Mohamed & Mariam</h1>
-                    <div class="sub-text">Together with their families</div>
+                    <h1 class="wedding-names">Mohamed & Mariam</h1>
+                    <div class="families-text">Together with their families</div>
                     
-                    <div class="wedding-date">Tuesday • September 1st 2026</div>
-                    <div style="color: #777; font-size: 0.95rem;">6:00 PM</div>
+                    <div class="date-text">Tuesday • September 1st 2026</div>
+                    <div class="time-text">6:00 PM</div>
                     
-                    <hr style="border:0; border-top: 1px solid #e2e5e0; margin: 30px 20px;">
+                    <hr class="divider">
                     
-                    <div style="font-size: 0.85rem; letter-spacing: 2px; color: #4a5d4e; text-transform: uppercase;">Countdown To Our Forever</div>
-                    <div class="countdown-container">
-                        <div class="count-box"><span class="num" id="d-days">107</span><span class="label">Days</span></div>
-                        <div class="count-box"><span class="num" id="d-hours">21</span><span class="label">Hours</span></div>
-                        <div class="count-box"><span class="num" id="d-mins">58</span><span class="label">Mins</span></div>
-                        <div class="count-box"><span class="num" id="d-secs">05</span><span class="label">Secs</span></div>
+                    <div class="countdown-title">Countdown To Our Forever</div>
+                    <div class="countdown-grid">
+                        <div class="time-box"><span class="digit" id="daysBox">000</span><span class="unit">Days</span></div>
+                        <div class="time-box"><span class="digit" id="hoursBox">00</span><span class="unit">Hours</span></div>
+                        <div class="time-box"><span class="digit" id="minsBox">00</span><span class="unit">Mins</span></div>
+                        <div class="time-box"><span class="digit" id="secsBox">00</span><span class="unit">Secs</span></div>
                     </div>
                     
                     <div class="venue-section">
-                        <div class="venue-title">Wedding Venue</div>
-                        <div class="venue-name">Four Seasons Hotel Cairo At Nile Plaza<br><span style="font-size: 0.8rem; color:#999;">Cairo, Egypt</span></div>
+                        <div class="venue-head">Wedding Venue</div>
+                        <div class="venue-detail">Four Seasons Hotel Cairo At Nile Plaza<br>Garden City, Cairo, Egypt</div>
                         
-                        <div class="map-wrapper">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.793754236423!2d31.23114947629344!3d30.042733918596144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840ca797bb467%3A0x2db496a8470aefb4!2sFour%20Seasons%20Hotel%20Cairo%20at%20Nile%20Plaza!5e0!3m2!1sen!2seg!4v1716500000000!5m2!1sen!2seg" 
-                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        <div class="map-box">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1d3453.974917544078!2d31.231245676295593!3d30.037568018318617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840ca04812301%3A0x33446c68e1a6c11c!2sFour%20Seasons%20Hotel%20Cairo%20at%20Nile%20Plaza!5e0!3m2!1sen!2seg!4v1716500000000!5m2!1sen!2seg" 
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
                     </div>
 
-                    <div style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #3e4e43; margin-bottom: 15px;">Invitation</div>
-                    <div class="invitation-text">
+                    <div style="font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--primary-color); margin-bottom: 12px; letter-spacing: 1px;">Invitation</div>
+                    <p class="invitation-body">
                         With hearts full of love and joy, we invite you to celebrate our special day. Your presence will make this beautiful occasion even more meaningful and unforgettable.
-                    </div>
+                    </p>
                     
-                    <div style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: #8a9a86; margin-top: 30px;">Join us for an elegant evening filled with love.</div>
+                    <div class="footer-note">Join us for an elegant evening filled with love.</div>
                     
                 </div>
             </div>
         </div>
     </div>
 
-    <audio id="weddingMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+    <audio id="bgAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
 
     <script>
-        function startInvitation() {
-            // تفعيل كلاس الأوبن عشان يفتح الغطاء ويفرد الصفحة بالطول
-            document.getElementById('mainWrapper').classList.add('is-opened');
+        function openInvitation() {
+            // تفعيل الأنيميشن ثلاثي الأبعاد وفرد الكارت بالطول الكامل
+            document.getElementById('invitationWrapper').classList.add('opened');
             
-            // تشغيل الصوت
-            var audio = document.getElementById('weddingMusic');
-            audio.play().catch(function(e) { console.log("المتصفح يطلب تفاعل أولاً لقراءة الصوت."); });
+            // تشغيل الموسيقى
+            var audio = document.getElementById('bgAudio');
+            audio.play().catch(function(err) { console.log("المتصفح يمنع الأوتو بلاي حتى الضغط الفعلي."); });
         }
 
-        // سكريبت العداد التنازلي التلقائي ليوم 1 سبتمبر 2026
-        const weddingTime = new Date('September 1, 2026 18:00:00').getTime();
+        // سكريبت العداد التنازلي التلقائي الدقيق والمظبوط ليوم 1 سبتمبر 2026
+        const targetWeddingDate = new Date('September 1, 2026 18:00:00').getTime();
 
-        setInterval(function() {
-            const rightNow = new Date().getTime();
-            const gap = weddingTime - rightNow;
+        const updateTimer = setInterval(function() {
+            const nowTime = new Date().getTime();
+            const timeDifference = targetWeddingDate - nowTime;
 
-            const days = Math.floor(gap / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((gap % (1000 * 60)) / 1000);
+            const d = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            document.getElementById('d-days').innerText = days;
-            document.getElementById('d-hours').innerText = hours < 10 ? '0' + hours : hours;
-            document.getElementById('d-mins').innerText = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('d-secs').innerText = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('daysBox').innerText = d;
+            document.getElementById('hoursBox').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minsBox').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('secsBox').innerText = s < 10 ? '0' + s : s;
+
+            if (timeDifference < 0) {
+                clearInterval(updateTimer);
+                document.getElementById('daysBox').innerText = '00';
+                document.getElementById('hoursBox').innerText = '00';
+                document.getElementById('minsBox').innerText = '00';
+                document.getElementById('secsBox').innerText = '00';
+            }
         }, 1000);
     </script>
 </body>
 </html>
-
 
