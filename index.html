@@ -1,86 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>دعوة زفاف</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: #8b9275; /* اللون الزيتوني للخلفية */
-            font-family: 'Georgia', serif;
-        }
-
-        .phone-frame {
-            width: 375px;
-            height: 667px;
-            background: #fff;
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #8b9275; }
+        
+        .container {
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
-
-        /* خلفية القصر */
-        .bg-castle {
             width: 100%;
-            height: 100%;
-            background: url('https://a123411.github.io/zafaf/castle.jpg') center/cover; /* استبدلها برابط صورتك */
-            position: absolute;
-            top: 0;
+            max-width: 450px;
+            height: 100vh;
+            margin: auto;
+            background: url('https://a123411.github.io/zafaf/castle.jpg') center/cover;
         }
 
-        /* الظرف (المثلث) */
-        .envelope-triangle {
+        /* شكل الظرف المثلث */
+        .envelope {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 300px;
+            height: 400px;
             background: #f4f1ea;
-            clip-path: polygon(0% 100%, 0% 100%, 100% 100%, 100% 100%, 50% 0%);
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 50% 30%, 0% 100%);
+            transition: clip-path 0.8s ease-in-out;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
             padding-top: 50px;
-            transition: clip-path 0.5s ease;
-        }
-
-        /* الختم الشمعي */
-        .wax-seal {
-            width: 100px;
-            height: 100px;
-            background: url('https://a123411.github.io/zafaf/seal.png') center/contain no-repeat; /* استبدلها برابط الختم */
-            cursor: pointer;
             z-index: 10;
         }
 
-        .open-text {
-            position: absolute;
-            bottom: 30px;
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #555;
-            cursor: pointer;
+        /* عند الفتح - يتغير شكل المثلث ليختفي الظرف */
+        .envelope.open {
+            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 50% 0%, 0% 0%);
         }
 
-        /* عند الفتح */
-        .opened .envelope-triangle {
-            clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%, 50% 100%);
+        .seal {
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .seal:hover { transform: scale(1.1); }
+
+        .open-label {
+            position: absolute;
+            bottom: 40px;
+            font-family: sans-serif;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            z-index: 5;
         }
     </style>
 </head>
 <body>
 
-    <div class="phone-frame" id="card">
-        <div class="bg-castle"></div>
-        <div class="envelope-triangle" onclick="this.parentElement.classList.add('opened')">
-            <div class="wax-seal"></div>
-            <div class="open-text">Open</div>
+    <div class="container">
+        <div class="content">
+            <h1>أهلاً بكم في زفافنا</h1>
+        </div>
+
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+            <img src="https://a123411.github.io/zafaf/seal.png" class="seal" alt="Seal">
+            <div class="open-label">Open</div>
         </div>
     </div>
 
+    <script>
+        function openEnvelope() {
+            document.getElementById('envelope').classList.add('open');
+        }
+    </script>
 </body>
 </html>
+
 
