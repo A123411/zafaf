@@ -2,59 +2,56 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حفل زفاف محمد ومريم</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        body { margin: 0; padding: 0; background-color: #fcfaf5; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        
-        /* --- 1. قسم البداية (الظرف) --- */
-        #intro { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #e8e2d4; transition: 1s; }
-        .envelope { width: 200px; height: 150px; background: #dcd0b8; cursor: pointer; border-radius: 5px; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .envelope::after { content: 'M & M'; font-family: 'Alex Brush'; font-size: 2rem; color: #5d4e33; }
-
-        /* --- 2. محتوى الدعوة (يظهر بعد الفتح) --- */
-        #main-content { display: none; text-align: center; padding: 50px 20px; }
-        .section { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid #eee; }
-        h1 { font-family: 'Alex Brush'; font-size: 4rem; color: #b8860b; }
-        .divider { width: 50px; height: 2px; background: #b8860b; margin: 20px 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+        body { font-family: 'Amiri', serif; background-color: #F8F4F0; color: #333; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
     </style>
 </head>
-<body>
+<body x-data="{ open: false }">
 
-    <div id="intro">
-        <div class="envelope" onclick="showInvitation()"></div>
-        <p>اضغط لفتح الدعوة</p>
-    </div>
-
-    <div id="main-content">
-        <div class="section" data-aos="fade-up">
-            <h1>محمد & مريم</h1>
-            <div class="divider"></div>
-            <p>يتشرف العروسان بدعوتكم لحضور حفل الزفاف</p>
-        </div>
-
-        <div class="section" data-aos="zoom-in">
-            <h2>موعدنا</h2>
-            <p>1 سبتمبر 2026</p>
-        </div>
-
-        <div class="section" data-aos="fade-right">
-            <h2>مكان الحفل</h2>
-            <p>فندق فور سيزونز - القاهرة</p>
-            <a href="#" style="background: #b8860b; color: white; padding: 10px 30px; border-radius: 30px; text-decoration: none;">موقع القاعة</a>
+    <div x-show="!open" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F8F4F0]">
+        <div @click="open = true" class="cursor-pointer text-center">
+            <div class="w-24 h-24 border-2 border-yellow-600 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <span class="text-yellow-700">الختم</span>
+            </div>
+            <p class="text-xl">اضغط لفتح الدعوة</p>
         </div>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        function showInvitation() {
-            document.getElementById('intro').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            AOS.init(); // تفعيل الحركات
-        }
-    </script>
+    <div x-show="open" x-cloak class="p-6 max-w-lg mx-auto space-y-8">
+        
+        <div class="text-center py-10">
+            <h1 class="text-5xl font-bold mb-4">زين & ملك</h1>
+            <p class="text-lg">بكل حب ننتظر حضوركم لتشاركونا أجمل ليلة</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="card text-center"><div class="text-3xl font-bold">110</div><div>يوم</div></div>
+            <div class="card text-center"><div class="text-3xl font-bold">21</div><div>ساعة</div></div>
+            <div class="card text-center"><div class="text-3xl font-bold">42</div><div>دقيقة</div></div>
+            <div class="card text-center"><div class="text-3xl font-bold">56</div><div>ثانية</div></div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-2xl text-center">برنامج الحفل</h2>
+            <div class="card">
+                <p class="font-bold">5:00 م - الاستقبال</p>
+                <p class="text-sm">ترحيب بالضيوف ومشروبات ترحيبية</p>
+            </div>
+            <div class="card">
+                <p class="font-bold">6:30 م - عقد القران</p>
+                <p class="text-sm">مراسم العقد المباركة</p>
+            </div>
+        </div>
+
+        <div class="card text-center">
+            <h2 class="text-xl font-bold mb-2">مكان الحفل</h2>
+            <p>فندق هيلتون، الساحل الشمالي، مصر</p>
+        </div>
+
+    </div>
 </body>
 </html>
