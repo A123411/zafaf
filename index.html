@@ -1,46 +1,289 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف محمد ومريم</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* إضافة بسيطة لمنع القفز في العداد */
-        .time-box span { display: block; font-size: 2rem; color: #b8860b; font-weight: bold; min-width: 40px; }
-        /* تحسين بسيط للأداء */
-        body { margin: 0; padding: 0; font-family: 'Cairo', sans-serif; background: #fdf8f2; overflow-x: hidden; }
-        /* بقية الـ CSS الخاص بك كما هو ممتاز جداً */
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>دعوة زفاف محمد ومريم</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Cairo',sans-serif;
+background:#fdf8f2;
+overflow-x:hidden;
+color:#333;
+opacity:0;
+animation:pageIn 1s ease forwards;
+}
+
+@keyframes pageIn{
+to{opacity:1}
+}
+
+/* خلفية */
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#f9ead2 0%,transparent 35%),
+radial-gradient(circle at bottom right,#f3d8aa 0%,transparent 35%),
+linear-gradient(135deg,#fffaf4,#f8efe2);
+z-index:-3;
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px 20px;
+}
+
+.hero h1{
+font-family:'Alex Brush';
+font-size:6rem;
+color:#b8860b;
+text-shadow:0 10px 25px rgba(184,134,11,.25);
+}
+
+.sub{
+font-size:1.3rem;
+color:#666;
+margin:15px 0 25px;
+}
+
+.date{
+font-size:1.1rem;
+color:#8a6f3d;
+font-weight:600;
+}
+
+/* timer */
+.timer{
+display:flex;
+gap:12px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.time-box{
+background:white;
+padding:15px;
+width:85px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.time-box span{
+font-size:1.8rem;
+color:#b8860b;
+font-weight:bold;
+}
+
+/* sections */
+.section{
+padding:100px 20px;
+text-align:center;
+opacity:0;
+transform:translateY(50px);
+transition:1s ease;
+}
+
+.section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.section-title{
+font-family:'Alex Brush';
+font-size:4rem;
+color:#b8860b;
+margin-bottom:20px;
+}
+
+/* cards */
+.love-timeline{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.love-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 15px 30px rgba(0,0,0,.08);
+transition:.4s;
+}
+
+.love-card:hover{
+transform:translateY(-6px);
+}
+
+/* hall */
+.hall-img img{
+width:100%;
+height:380px;
+object-fit:cover;
+border-radius:20px;
+}
+
+.hall-btn{
+display:inline-block;
+margin-top:20px;
+padding:14px 30px;
+border-radius:40px;
+background:linear-gradient(135deg,#b8860b,#d4af37);
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* ورد محسّن */
+.petal{
+position:fixed;
+top:-10vh;
+width:14px;
+height:14px;
+background:radial-gradient(circle at 30% 30%, #ffd1dc, #ff4d88);
+border-radius:60% 40%;
+opacity:0.7;
+animation:fall linear infinite;
+pointer-events:none;
+z-index:9999;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0);opacity:0}
+10%{opacity:.8}
+100%{transform:translateY(110vh) rotate(360deg) translateX(20px);opacity:0}
+}
+
+/* footer */
+footer{
+padding:30px;
+text-align:center;
+background:#111;
+color:#fff;
+margin-top:60px;
+}
+
+@media(max-width:768px){
+.hero h1{font-size:3.8rem;}
+.section-title{font-size:3rem;}
+}
+
+</style>
 </head>
+
 <body>
-    <!-- محتوى الصفحة الخاص بك -->
 
-    <script>
-        const eventDate = new Date("September 1, 2026 18:00:00").getTime();
+<section class="hero">
+<div>
+<h1>محمد & مريم</h1>
+<p class="sub">ليلة واحدة… بداية عمر كامل ❤️</p>
+<div class="date">1 سبتمبر 2026 — 6:00 مساءً</div>
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = eventDate - now;
+<div class="timer">
+<div class="time-box"><span id="days">00</span><div>يوم</div></div>
+<div class="time-box"><span id="hours">00</span><div>ساعة</div></div>
+<div class="time-box"><span id="mins">00</span><div>دقيقة</div></div>
+<div class="time-box"><span id="secs">00</span><div>ثانية</div></div>
+</div>
 
-            if (diff < 0) return; // الحفل انتهى
+</div>
+</section>
 
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
+<section class="section">
+<h2 class="section-title">قصتنا</h2>
+<p>بدأت الحكاية بلقاء بسيط تحول إلى أجمل قصة حب...</p>
+</section>
 
-            document.getElementById('days').innerHTML = d.toString().padStart(2, '0');
-            document.getElementById('hours').innerHTML = h.toString().padStart(2, '0');
-            document.getElementById('mins').innerHTML = m.toString().padStart(2, '0');
-            document.getElementById('secs').innerHTML = s.toString().padStart(2, '0');
-        }
+<section class="section">
+<h2 class="section-title">رحلة الحب</h2>
 
-        setInterval(updateTimer, 1000);
-        updateTimer(); // تشغيل فوري
+<div class="love-timeline">
+<div class="love-card">💫 البداية</div>
+<div class="love-card">💛 التعارف</div>
+<div class="love-card">💍 الخطوبة</div>
+<div class="love-card">✨ الزفاف</div>
+</div>
 
-        // بقية السكريبت الخاص بك ...
-    </script>
+</section>
+
+<section class="section">
+<h2 class="section-title">مكان الحفل</h2>
+
+<div class="hall-img">
+<img src="https://images.unsplash.com/photo-1529634896101-1c7f3c1a5b1f">
+</div>
+
+<a class="hall-btn" href="https://maps.google.com" target="_blank">📍 الموقع</a>
+
+</section>
+
+<footer>
+محمد & مريم — 2026 ✨
+</footer>
+
+<script>
+
+/* timer */
+const eventDate = new Date("September 1, 2026 18:00:00").getTime();
+
+setInterval(()=>{
+const now = new Date().getTime();
+const diff = eventDate - now;
+
+if(diff < 0) return;
+
+document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+document.getElementById('hours').innerText = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+document.getElementById('mins').innerText = Math.floor((diff % (1000*60*60))/(1000*60));
+document.getElementById('secs').innerText = Math.floor((diff % (1000*60))/1000);
+
+},1000);
+
+/* sections */
+const sections=document.querySelectorAll('.section');
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add('show');
+}
+});
+},{threshold:0.2});
+
+sections.forEach(s=>observer.observe(s));
+
+/* petals */
+for(let i=0;i<40;i++){
+let p=document.createElement("div");
+p.classList.add("petal");
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(5+Math.random()*5)+"s";
+p.style.opacity=Math.random();
+document.body.appendChild(p);
+}
+
+</script>
+
 </body>
 </html>
-
