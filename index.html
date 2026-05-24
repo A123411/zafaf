@@ -2,56 +2,61 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف زين و ملك</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-        body { font-family: 'Amiri', serif; background-color: #F8F4F0; color: #333; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        body { font-family: 'Cairo', sans-serif; background-color: #fdfaf7; color: #4a4a4a; }
+        h1, h2, h3 { font-family: 'Amiri', serif; }
+        .golden-text { color: #b8860b; }
+        .bg-cream { background-color: #fdfaf7; }
+        .wax-seal { border: 2px solid #b8860b; border-radius: 50%; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; margin: 0 auto; background: #d4af37; color: white; cursor: pointer; }
     </style>
 </head>
-<body x-data="{ open: false }">
+<body class="p-4 md:p-10">
 
-    <div x-show="!open" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F8F4F0]">
-        <div @click="open = true" class="cursor-pointer text-center">
-            <div class="w-24 h-24 border-2 border-yellow-600 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span class="text-yellow-700">الختم</span>
-            </div>
-            <p class="text-xl">اضغط لفتح الدعوة</p>
+    <div id="cover" class="fixed inset-0 bg-cream z-50 flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="wax-seal mb-4 shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12s4.5 10 10 10 10-4.5 10-10Z"/><path d="M12 2v20"/><path d="M2 12h20"/><path d="m16.2 16.2 3.5 3.5"/><path d="m16.2 7.8 3.5-3.5"/><path d="m7.8 7.8 3.5 3.5"/><path d="m7.8 16.2 3.5-3.5"/></svg>
         </div>
+        <button onclick="document.getElementById('cover').classList.add('hidden')" class="text-xl font-bold golden-text">اضغط لفتح الدعوة</button>
     </div>
 
-    <div x-show="open" x-cloak class="p-6 max-w-lg mx-auto space-y-8">
-        
-        <div class="text-center py-10">
-            <h1 class="text-5xl font-bold mb-4">زين & ملك</h1>
-            <p class="text-lg">بكل حب ننتظر حضوركم لتشاركونا أجمل ليلة</p>
+    <div class="max-w-2xl mx-auto space-y-12 text-center">
+        <header>
+            <h1 class="text-4xl mb-4">زين & ملك</h1>
+            <p class="text-lg">بكل حب ننتظر حضوركم لنشاركنا أجمل ليلة في بداية مسوارنا.</p>
+        </header>
+
+        <div class="grid grid-cols-4 gap-4 p-6 bg-white rounded-lg shadow-sm border border-stone-200">
+            <div><div class="text-3xl font-bold golden-text" id="days">110</div><div>يوم</div></div>
+            <div><div class="text-3xl font-bold golden-text" id="hours">21</div><div>ساعة</div></div>
+            <div><div class="text-3xl font-bold golden-text" id="minutes">26</div><div>دقيقة</div></div>
+            <div><div class="text-3xl font-bold golden-text" id="seconds">21</div><div>ثانية</div></div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
-            <div class="card text-center"><div class="text-3xl font-bold">110</div><div>يوم</div></div>
-            <div class="card text-center"><div class="text-3xl font-bold">21</div><div>ساعة</div></div>
-            <div class="card text-center"><div class="text-3xl font-bold">42</div><div>دقيقة</div></div>
-            <div class="card text-center"><div class="text-3xl font-bold">56</div><div>ثانية</div></div>
-        </div>
-
-        <div class="space-y-4">
-            <h2 class="text-2xl text-center">برنامج الحفل</h2>
-            <div class="card">
-                <p class="font-bold">5:00 م - الاستقبال</p>
-                <p class="text-sm">ترحيب بالضيوف ومشروبات ترحيبية</p>
+        <section>
+            <h2 class="text-3xl mb-6">برنامج الحفل</h2>
+            <div class="space-y-4 text-right">
+                <div class="p-4 border-b border-stone-200"><strong>5:00 م</strong> - الاستقبال: ترحيب بالضيوف وضربات ترحيبية</div>
+                <div class="p-4 border-b border-stone-200"><strong>6:30 م</strong> - عقد القران: مراسم العقد في القاعة الرئيسية</div>
+                <div class="p-4 border-b border-stone-200"><strong>7:30 م</strong> - حفل الزفاف: زفة العروسين</div>
+                <div class="p-4 border-b border-stone-200"><strong>9:00 م</strong> - العشاء: مأدبة عشاء فاخرة</div>
+                <div class="p-4"><strong>11:00 م</strong> - الختام: ألعاب نارية</div>
             </div>
-            <div class="card">
-                <p class="font-bold">6:30 م - عقد القران</p>
-                <p class="text-sm">مراسم العقد المباركة</p>
-            </div>
-        </div>
+        </section>
 
-        <div class="card text-center">
-            <h2 class="text-xl font-bold mb-2">مكان الحفل</h2>
-            <p>فندق هيلتون، الساحل الشمالي، مصر</p>
-        </div>
-
+        <section>
+            <h2 class="text-3xl mb-4">مكان الحفل</h2>
+            <p>فندق هيلتون الساحل الشمالي</p>
+            <button class="mt-4 px-6 py-2 bg-stone-800 text-white rounded">عرض على الخريطة</button>
+        </section>
     </div>
+
+    <script>
+        // قيم ثابتة للعرض كما في الفيديو
+        console.log("الدعوة جاهزة!");
+    </script>
 </body>
 </html>
