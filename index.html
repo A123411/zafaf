@@ -436,30 +436,24 @@ document.getElementById('secs').innerHTML = Math.floor((diff % (1000*60))/1000);
 },1000);
 
 
-/* 🔥 FIX SCROLL (المهم) */
+/* 🔥 SCROLL FIX النهائي بدون مشاكل */
 const sections = document.querySelectorAll('.section');
 
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('show');
+function revealSections() {
+sections.forEach(sec => {
+const top = sec.getBoundingClientRect().top;
+const windowHeight = window.innerHeight;
+
+if (top < windowHeight - 80) {
+sec.classList.add('show');
 }
 });
-}, {
-threshold: 0.1,
-rootMargin: "0px 0px -80px 0px"
-});
-
-sections.forEach(section => observer.observe(section));
-
-window.addEventListener("load", () => {
-sections.forEach(section => {
-const rect = section.getBoundingClientRect();
-if (rect.top < window.innerHeight) {
-section.classList.add("show");
 }
-});
-});
+
+revealSections();
+window.addEventListener("scroll", revealSections);
+window.addEventListener("load", revealSections);
+
 
 /* 🌸 ورد */
 for(let i=0;i<70;i++){
