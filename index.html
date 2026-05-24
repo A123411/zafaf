@@ -19,6 +19,10 @@ box-sizing:border-box;
 scroll-behavior:smooth;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 font-family:'Cairo',sans-serif;
 background:#fdf8f2;
@@ -26,11 +30,15 @@ overflow-x:hidden;
 color:#333;
 opacity:0;
 animation:pageIn 1s ease forwards;
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
 }
 
-@keyframes pageIn{to{opacity:1}}
+@keyframes pageIn{
+to{opacity:1}
+}
 
-/* خلفية */
+/* الخلفية */
 body::before{
 content:'';
 position:fixed;
@@ -42,7 +50,7 @@ linear-gradient(135deg,#fffaf4,#f8efe2);
 z-index:-3;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
 min-height:100vh;
 display:flex;
@@ -145,8 +153,14 @@ animation:wheel 1.5s infinite;
 }
 
 @keyframes wheel{
-0%{opacity:1;transform:translate(-50%,0);}
-100%{opacity:0;transform:translate(-50%,12px);}
+0%{
+opacity:1;
+transform:translate(-50%,0);
+}
+100%{
+opacity:0;
+transform:translate(-50%,12px);
+}
 }
 
 @keyframes fadePulse{
@@ -154,18 +168,22 @@ animation:wheel 1.5s infinite;
 50%{opacity:1;}
 }
 
-/* الأقسام */
+/* السكشنات */
 .section{
 padding:120px 20px;
 text-align:center;
 opacity:0;
-transform:translateY(60px);
-transition:1s ease;
+transform:translate3d(0,60px,0);
+transition:
+opacity .9s ease,
+transform .9s cubic-bezier(.22,1,.36,1);
+will-change:opacity,transform;
+backface-visibility:hidden;
 }
 
 .section.show{
 opacity:1;
-transform:translateY(0);
+transform:translate3d(0,0,0);
 }
 
 .section-title{
@@ -207,7 +225,7 @@ background:linear-gradient(90deg,#b8860b,#f4d36b);
 transform:translateY(-8px) scale(1.02);
 }
 
-/* القاعة */
+/* مكان الحفل */
 .hall-card{
 max-width:900px;
 margin:50px auto 0;
@@ -223,12 +241,15 @@ width:100%;
 border-radius:25px;
 overflow:hidden;
 box-shadow:0 20px 40px rgba(0,0,0,.15);
+background:#eee;
+min-height:420px;
 }
 
 .hall-img img{
 width:100%;
 height:420px;
 object-fit:cover;
+display:block;
 transition:.5s;
 }
 
@@ -263,34 +284,7 @@ transition:.3s;
 transform:translateY(-5px) scale(1.05);
 }
 
-/* 🌸 ورد */
-.petal{
-position:fixed;
-top:-10vh;
-width:18px;
-height:18px;
-background:radial-gradient(circle at 30% 30%, #ffd1dc, #ff5c8a);
-border-radius:60% 40% 60% 40%;
-opacity:0.9;
-filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));
-animation:fall linear infinite;
-pointer-events:none;
-z-index:9999;
-}
-
-@keyframes fall{
-0%{
-transform:translateY(-10vh) rotate(0deg);
-opacity:0;
-}
-10%{opacity:1;}
-100%{
-transform:translateY(110vh) rotate(360deg) translateX(30px);
-opacity:0;
-}
-}
-
-/* ✨ الخاتمة */
+/* الخاتمة */
 .final-message{
 padding:120px 20px;
 text-align:center;
@@ -320,12 +314,20 @@ background:#1a1a1a;
 color:white;
 }
 
-@keyframes pageIn{to{opacity:1}}
-
 @media(max-width:768px){
-.hero h1{font-size:4rem;}
-.section-title{font-size:3.2rem;}
-.final-message h2{font-size:3rem;}
+
+.hero h1{
+font-size:4rem;
+}
+
+.section-title{
+font-size:3.2rem;
+}
+
+.final-message h2{
+font-size:3rem;
+}
+
 }
 
 </style>
@@ -342,15 +344,36 @@ color:white;
 
 <h1>محمد & مريم</h1>
 
-<p class="sub">ليلة واحدة… لكنها بداية عمر كامل من الحكاية ❤️</p>
+<p class="sub">
+ليلة واحدة… لكنها بداية عمر كامل من الحكاية ❤️
+</p>
 
-<div class="date">1 سبتمبر 2026 — 6:00 مساءً</div>
+<div class="date">
+1 سبتمبر 2026 — 6:00 مساءً
+</div>
 
 <div class="timer">
-<div class="time-box"><span id="days">00</span><div>يوم</div></div>
-<div class="time-box"><span id="hours">00</span><div>ساعة</div></div>
-<div class="time-box"><span id="mins">00</span><div>دقيقة</div></div>
-<div class="time-box"><span id="secs">00</span><div>ثانية</div></div>
+
+<div class="time-box">
+<span id="days">00</span>
+<div>يوم</div>
+</div>
+
+<div class="time-box">
+<span id="hours">00</span>
+<div>ساعة</div>
+</div>
+
+<div class="time-box">
+<span id="mins">00</span>
+<div>دقيقة</div>
+</div>
+
+<div class="time-box">
+<span id="secs">00</span>
+<div>ثانية</div>
+</div>
+
 </div>
 
 <div class="scroll-indicator">
@@ -364,35 +387,65 @@ color:white;
 
 <!-- القصة -->
 <section class="section">
+
 <h2 class="section-title">قصتنا</h2>
-<p>بدأت الحكاية بلقاء بسيط تحول إلى أجمل قصة حب...</p>
+
+<p>
+بدأت الحكاية بلقاء بسيط تحول إلى أجمل قصة حب...
+</p>
+
 </section>
 
 <!-- رحلة الحب -->
 <section class="section">
+
 <h2 class="section-title">رحلة الحب</h2>
 
 <div class="love-timeline">
 
-<div class="love-card"><h3>💫 البداية</h3><p>لقاء غيّر كل شيء.</p></div>
-<div class="love-card"><h3>💛 التعارف</h3><p>ضحك وحديث قرّب القلوب.</p></div>
-<div class="love-card"><h3>💍 الخطوبة</h3><p>خطوة نحو المستقبل.</p></div>
-<div class="love-card"><h3>✨ الزفاف</h3><p>نكتب النهاية السعيدة.</p></div>
+<div class="love-card">
+<h3>💫 البداية</h3>
+<p>لقاء غيّر كل شيء.</p>
+</div>
+
+<div class="love-card">
+<h3>💛 التعارف</h3>
+<p>ضحك وحديث قرّب القلوب.</p>
+</div>
+
+<div class="love-card">
+<h3>💍 الخطوبة</h3>
+<p>خطوة نحو المستقبل.</p>
+</div>
+
+<div class="love-card">
+<h3>✨ الزفاف</h3>
+<p>نكتب النهاية السعيدة.</p>
+</div>
 
 </div>
+
 </section>
 
-<!-- القاعة -->
+<!-- مكان الحفل -->
 <section class="section">
+
 <h2 class="section-title">مكان الحفل</h2>
 
 <div class="hall-card">
 
 <div class="hall-img">
-<img src="https://images.unsplash.com/photo-1529634896101-1c7f3c1a5b1f">
+
+<img 
+src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400&auto=format&fit=crop"
+loading="eager"
+decoding="async"
+>
+
 <div class="hall-overlay">
 <h3>قاعة الاحتفال</h3>
 </div>
+
 </div>
 
 <a class="hall-btn" href="https://maps.google.com" target="_blank">
@@ -403,13 +456,14 @@ color:white;
 
 </section>
 
-<!-- ✨ الخاتمة -->
+<!-- الخاتمة -->
 <section class="final-message">
 
 <h2>ننتظركم في ليلة لا تُنسى</h2>
 
 <p>
-وجودكم هو أجمل هدية لنا في هذا اليوم الخاص ❤️<br>
+وجودكم هو أجمل هدية لنا في هذا اليوم الخاص ❤️
+<br>
 نفرح بكم ونكمل معكم أجمل بداية لحكايتنا الجديدة
 </p>
 
@@ -421,52 +475,55 @@ color:white;
 
 <script>
 
-/* عداد */
+/* العداد */
 const eventDate = new Date("September 1, 2026 18:00:00").getTime();
 
 setInterval(()=>{
+
 const now = new Date().getTime();
 const diff = eventDate - now;
 
-document.getElementById('days').innerHTML = Math.floor(diff / (1000*60*60*24));
-document.getElementById('hours').innerHTML = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
-document.getElementById('mins').innerHTML = Math.floor((diff % (1000*60*60))/(1000*60));
-document.getElementById('secs').innerHTML = Math.floor((diff % (1000*60))/1000);
+document.getElementById('days').innerHTML =
+Math.floor(diff / (1000*60*60*24));
+
+document.getElementById('hours').innerHTML =
+Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+
+document.getElementById('mins').innerHTML =
+Math.floor((diff % (1000*60*60))/(1000*60));
+
+document.getElementById('secs').innerHTML =
+Math.floor((diff % (1000*60))/1000);
 
 },1000);
 
 
-/* 🔥 SCROLL FIX النهائي بدون مشاكل */
+/* Reveal سريع وناعم */
 const sections = document.querySelectorAll('.section');
 
-function revealSections() {
-sections.forEach(sec => {
-const top = sec.getBoundingClientRect().top;
-const windowHeight = window.innerHeight;
+function revealSections(){
 
-if (top < windowHeight - 80) {
-sec.classList.add('show');
+const triggerBottom = window.innerHeight * 0.92;
+
+sections.forEach(section => {
+
+const rect = section.getBoundingClientRect();
+
+if(rect.top < triggerBottom){
+section.classList.add('show');
 }
+
 });
+
 }
 
-revealSections();
-window.addEventListener("scroll", revealSections);
-window.addEventListener("load", revealSections);
+window.addEventListener('load', revealSections);
 
+window.addEventListener('scroll', revealSections, {
+passive:true
+});
 
-/* 🌸 ورد */
-for(let i=0;i<70;i++){
-let petal=document.createElement("div");
-petal.classList.add("petal");
-
-petal.style.left=Math.random()*100+"vw";
-petal.style.animationDuration=(4+Math.random()*6)+"s";
-petal.style.animationDelay=Math.random()*5+"s";
-petal.style.transform="scale("+(0.6+Math.random())+")";
-
-document.body.appendChild(petal);
-}
+window.addEventListener('resize', revealSections);
 
 </script>
 
