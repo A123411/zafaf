@@ -1,27 +1,53 @@
-<!DOCTYPE html> ==
-$0
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-view-source
-scroll
-<head>@ </head>
-Styles
-Y Filter
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; overflow: hidden; }
+        .container { width: 100%; max-width: 600px; text-align: center; }
+        video { width: 100%; cursor: pointer; border-radius: 15px; }
+        #invitation-card { display: none; padding: 20px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .hidden { display: none; }
+    </style>
+</head>
 <body>
-::before
-<-- Preloader: tap poster to play video -
--<div class="loader done" id="loader" aria-label="دعوة الزفاف">
-‹video class="loader-video" id="preloaderVideo" poster="assets/intro-poste r-jpg" playsinline preload="metadata" muted></video>
-•<button type="button" class="loader-poster" id="loaderPoster" aria-label=
-اضغط لفتح الدعوة ( "
+
+<div class="container">
+    <video id="video1" muted playsinline>
+        <source src="WhatsApp Video 1447-12-07 at 22.04.39.mp4" type="video/mp4">
+    </video>
+
+    <video id="video2" class="hidden" playsinline>
+        <source src="WhatsApp Video 1447-12-07 at 22.04.40.mp4" type="video/mp4">
+    </video>
+
+    <div id="invitation-card">
+        <h1>حفل زفاف سعيد</h1>
+        <p>يسعدنا تشريفكم لنا في هذه الليلة المميزة...</p>
+    </div>
 </div>
-<! - Music toggle ->
-» <button class="music-toggle playing" id="musicToggle" aria-label="إيقاف الم
-ria-pressed="true">buttonflex.
-• ‹main>@</main>
-‹div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true"
-"عرض الصورة بحجم كامل "ab
-• <audio id="bgm" loop preload="auto">
-@ </audio>
-«script src="script.js">/script>
+
+<script>
+    const v1 = document.getElementById('video1');
+    const v2 = document.getElementById('video2');
+    const card = document.getElementById('invitation-card');
+
+    // تشغيل الفيديو الأول تلقائياً (بما أنه صامت)
+    v1.play();
+
+    // عند الضغط على الفيديو الأول
+    v1.addEventListener('click', () => {
+        v1.classList.add('hidden');
+        v2.classList.remove('hidden');
+        v2.play();
+    });
+
+    // عند انتهاء الفيديو الثاني (فتح الظرف)
+    v2.onended = () => {
+        v2.classList.add('hidden');
+        card.style.display = 'block';
+    };
+</script>
+
 </body>
 </html>
