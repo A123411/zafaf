@@ -1,507 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed & Mariam Wedding Invitation</title>
+    <title>حفل زفاف محمد ومريم</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital@1&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --bg-overlay: rgba(20, 24, 21, 0.65); /* تأثير داكن فخم يبرز الورد والقصر */
-            --glass-bg: rgba(255, 255, 255, 0.08); /* زجاج شفاف فاخر */
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --text-gold: #dfba81; /* لون الذهب المطفي الكلاسيكي */
-            --text-light: #f7f9f6;
-            --text-muted: #b3bcb5;
-        }
+        body { margin: 0; padding: 0; background-color: #fcfaf5; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
+        
+        /* --- 1. قسم البداية (الظرف) --- */
+        #intro { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #e8e2d4; transition: 1s; }
+        .envelope { width: 200px; height: 150px; background: #dcd0b8; cursor: pointer; border-radius: 5px; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .envelope::after { content: 'M & M'; font-family: 'Alex Brush'; font-size: 2rem; color: #5d4e33; }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            /* خلفية مستقرة جداً لقصر كلاسيكي محاط بالورود البيضاء (طبق الأصل من الفيديو) */
-            background: #141815 url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1200') center center no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* لمنع السكرول الخارجي المزعج */
-            position: relative;
-        }
-
-        /* طبقة حماية سينمائية تغطي الخلفية بالكامل وتمنع بهتان الألوان مع تأثير ضبابي */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--bg-overlay);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 1;
-        }
-
-        /* --- 1. الهيكل الخارجي (موزون على مقاسات الموبايل) --- */
-        .app-container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 415px; /* مقاس الموبايل المثالي */
-            height: 92vh;
-            margin: 4vh auto;
-            background: rgba(18, 22, 19, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            overflow: hidden; /* لمنع سكرول محتويات الدعوة قبل فتح الظرف */
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* --- 2. صفحة البداية السينمائية (الظرف المفتوح والختم الشمعي) --- */
-        #introOverlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-        }
-
-        /* حاوية الورد المتساقط - فوق الستارة وتحت الظرف */
-        #petalContainer {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 60%;
-            z-index: 11;
-            pointer-events: none;
-        }
-
-        /* الطبقة الأمامية للظرف الكريمي المفتوح (V-Shape) المطبق بالأكواد تماماً */
-        .envelope-wrapper {
-            position: relative;
-            width: 100%;
-            height: 42vh;
-            background-color: #f6f3eb; /* اللون الكريمي الفاخر للظرف */
-            z-index: 12;
-            box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 25px;
-            margin-top: 50vh; /* لمحاكاة خروج الظرف من الأسفل */
-        }
-
-        /* قطع زاوية الـ V الحقيقية والنظيفة للظرف */
-        .envelope-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -45px; left: 0;
-            width: 0; height: 0;
-            border-left: 207.5px solid transparent;
-            border-right: 207.5px solid transparent;
-            border-bottom: 45px solid #f6f3eb;
-        }
-        @media(max-width: 415px) {
-            .envelope-wrapper::before {
-                border-left: 50vw solid transparent;
-                border-right: 50vw solid transparent;
-            }
-        }
-
-        /* الختم الشمعي الذهبي البارز ثلاثي الأبعاد المتقن والملكي (نفس الفيديو بالظبط) */
-        .wax-seal {
-            position: absolute;
-            top: -30px; /* مرتكز بدقة فوق قمة زاوية الظرف */
-            width: 110px;
-            height: 110px;
-            background: radial-gradient(circle, #fce0ad 0%, #c4a46a 50%, #91733b 90%, #614a20 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 25px rgba(74, 56, 23, 0.45), 
-                        inset 0 3px 6px rgba(255,255,255,0.5),
-                        inset 0 -4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-            animation: pulseSeal 3s infinite ease-in-out;
-            transition: transform 0.2s ease;
-        }
-        .wax-seal:hover {
-            transform: scale(1.04);
-        }
-
-        /* حفر حروف M&M والورد الداخلي الفاخر الـ Vintage */
-        .wax-seal::after {
-            content: 'M&M';
-            font-family: 'Alex Brush', cursive;
-            font-size: 1.9rem;
-            color: #453414;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.2);
-            border: 2px dashed rgba(74, 56, 23, 0.3);
-            width: 86px;
-            height: 86px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
-            font-weight: bold;
-        }
-        .wax-seal::before {
-            content: '✿';
-            position: absolute;
-            bottom: 15px;
-            font-size: 0.55rem;
-            color: rgba(74, 56, 23, 0.5);
-        }
-
-        /* نص Open الكلاسيكي بالأسفل برتم راقٍ */
-        .open-btn-text {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 5px;
-            color: #554831;
-            text-transform: uppercase;
-            margin-top: 80px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .open-btn-text:hover {
-            color: var(--text-gold);
-        }
-
-        @keyframes pulseSeal {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); box-shadow: 0 14px 28px rgba(74, 56, 23, 0.55); }
-            100% { transform: scale(1); }
-        }
-
-        /* حركة سحب الظرف بالكامل لأسفل واختفائه بنعومة وسلاسة السينما */
-        .slide-down-exit {
-            transform: translateY(105%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* --- 3. تأثير تساقط الورد والبتلات البيضاء المطور --- */
-        .petal {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50% 0 50% 50%; 
-            opacity: 0.9;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-40px) rotate(0deg) scale(0.6); opacity: 0; }
-            15% { opacity: 0.9; }
-            95% { opacity: 0.85; }
-            100% { transform: translateY(50vh) rotate(280deg) scale(1) translateX(40px); opacity: 0; }
-        }
-
-        /* --- 4. تنسيق محتوى كارت الدعوة الفاخر بالداخل --- */
-        .main-card-content {
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 60px 24px;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s ease 0.6s; /* يظهر بعد انزلاق الظرف */
-        }
-        #introOverlay.slide-down-exit + .main-card-content {
-            opacity: 1;
-        }
-
-        .header-tag {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-gold);
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        .subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .main-title {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3.6rem;
-            font-weight: 400;
-            color: var(--text-gold);
-            margin: 10px 0 20px;
-            line-height: 1.1;
-        }
-
-        .arabic-welcome {
-            font-family: 'Amiri', serif;
-            font-size: 1.35rem;
-            color: var(--text-light);
-            line-height: 1.8;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-
-        .divider {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
-            margin: 30px auto;
-        }
-
-        .date-badge {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            font-weight: 600;
-            margin-bottom: 6px;
-            letter-spacing: 1px;
-        }
-        .time-badge {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* كارت العداد التنازلي الزجاجي الفاخر */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 24px 10px;
-            margin: 35px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-        .card-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 2.5px;
-            color: var(--text-gold);
-            text-transform: uppercase;
-            margin-bottom: 18px;
-            font-weight: 600;
-        }
-        .countdown-grid { display: flex; justify-content: space-around; }
-        .timer-box .number {
-            display: block;
-            font-family: 'Cinzel', serif;
-            font-size: 1.45rem;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-        .timer-box .label {
-            display: block;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
-
-        /* تفاصيل المكان وزر الخريطة المباشر */
-        .venue-section { margin-top: 35px; }
-        .venue-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
-            letter-spacing: 1.5px;
-            color: var(--text-gold);
-            margin-bottom: 6px;
-        }
-        .venue-name {
-            font-size: 0.8rem;
-            line-height: 1.5;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-        .map-button {
-            display: inline-block;
-            background: none;
-            border: 1px solid var(--text-gold);
-            color: var(--text-gold);
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            padding: 11px 26px;
-            border-radius: 30px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .map-button::before { content: '📍 '; margin-right: 6px; }
-        .map-button:hover {
-            background: var(--text-gold);
-            color: #141815;
-            box-shadow: 0 5px 15px rgba(223, 186, 129, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .arabic-quote {
-            font-family: 'Amiri', serif;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-top: 40px;
-            font-weight: 600;
-        }
-        .footer-sig {
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            letter-spacing: 4px;
-            color: var(--text-gold);
-            margin-top: 40px;
-        }
+        /* --- 2. محتوى الدعوة (يظهر بعد الفتح) --- */
+        #main-content { display: none; text-align: center; padding: 50px 20px; }
+        .section { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid #eee; }
+        h1 { font-family: 'Alex Brush'; font-size: 4rem; color: #b8860b; }
+        .divider { width: 50px; height: 2px; background: #b8860b; margin: 20px 0; }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <div id="introOverlay">
-            <div id="petalContainer"></div>
-            <div class="envelope-wrapper">
-                <div class="wax-seal" onclick="openInvitation()"></div>
-                <div class="open-btn-text" onclick="openInvitation()">Open</div>
-            </div>
+    <div id="intro">
+        <div class="envelope" onclick="showInvitation()"></div>
+        <p>اضغط لفتح الدعوة</p>
+    </div>
+
+    <div id="main-content">
+        <div class="section" data-aos="fade-up">
+            <h1>محمد & مريم</h1>
+            <div class="divider"></div>
+            <p>يتشرف العروسان بدعوتكم لحضور حفل الزفاف</p>
         </div>
 
-        <div class="main-card-content">
-            
-            <div class="header-tag">The Wedding Celebration</div>
-            
-            <p class="subtitle">Together with their families</p>
-            
-            <h1 class="main-title">Mohamed & Mariam</h1>
-            
-            <div class="arabic-welcome">Kindly Invite You To Celebrate Their Special Day<br>بأريج الحب نلقاكم، وبمقدمكم تزداد فرحتنا</div>
-            
-            <div class="divider"></div>
-            
-            <div class="date-badge">Tuesday, September 1st, 2026</div>
-            <div class="time-badge">At Six O'clock In The Evening</div>
-            
-            <div class="glass-card">
-                <div class="card-title">Counting Down To Our Forever</div>
-                <div class="countdown-grid">
-                    <div class="timer-box"><span class="number" id="days">000</span><span class="label">Days</span></div>
-                    <div class="timer-box"><span class="number" id="hours">00</span><span class="label">Hours</span></div>
-                    <div class="timer-box"><span class="number" id="minutes">00</span><span class="label">Mins</span></div>
-                    <div class="timer-box"><span class="number" id="seconds">00</span><span class="label">Secs</span></div>
-                </div>
-            </div>
-            
-            <div class="venue-section">
-                <div class="venue-title">Wedding Venue</div>
-                <p class="venue-name">Four Seasons Hotel Cairo At Nile Plaza<br>Garden City, Cairo, Egypt</p>
-                
-                <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1d3453.974917544078!2d31.231245676295593!3d30.037568018318617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840ca04812301%3A0x33446c68e1a6c11c!2sFour%20Seasons%20Hotel%20Cairo%20at%20Nile%20Plaza!5e0!3m2!1sen!2seg!4v1716500000000!5m2!1sen!2seg" target="_blank" class="map-button">
-                    View Location On Map
-                </a>
-            </div>
+        <div class="section" data-aos="zoom-in">
+            <h2>موعدنا</h2>
+            <p>1 سبتمبر 2026</p>
+        </div>
 
-            <p class="arabic-quote">
-                تكتمل بهجتنا بمشاركتكم لنا لحظات العمر السعيدة، حضوركم يكلل ليلتنا بالفرح والسرور.
-            </p>
-            
-            <div class="footer-sig">See You There</div>
-
+        <div class="section" data-aos="fade-right">
+            <h2>مكان الحفل</h2>
+            <p>فندق فور سيزونز - القاهرة</p>
+            <a href="#" style="background: #b8860b; color: white; padding: 10px 30px; border-radius: 30px; text-decoration: none;">موقع القاعة</a>
         </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        window.onload = function() {
-            startPetalFall();
-        };
-
-        // دالة فتح الظرف السينمائية وانزلاقه لأسفل بسلاسة تامة للخارج ليظهر الكارت
-        function openInvitation() {
-            const overlay = document.getElementById('introOverlay');
-            const envelopeWrapper = document.querySelector('.envelope-wrapper');
-            overlay.classList.add('slide-down-exit');
-            envelopeWrapper.style.transform = 'translateY(100%)';
-            envelopeWrapper.style.opacity = '0';
+        function showInvitation() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            AOS.init(); // تفعيل الحركات
         }
-
-        // نظام توليد وتساقط البتلات بالكود المستقر (نفس التأثير السينمائي المطور)
-        function startPetalFall() {
-            const container = document.getElementById('petalContainer');
-            const maxPetals = 25; 
-            
-            for (let i = 0; i < maxPetals; i++) {
-                const petal = document.createElement('div');
-                petal.classList.add('petal');
-                
-                const size = Math.random() * 12 + 10; 
-                petal.style.width = size + 'px';
-                petal.style.height = (size * 1.2) + 'px';
-                
-                // تدرج كريمي ووردي ناعم للبتلات لتعطي مظهراً طبيعياً
-                petal.style.background = 'linear-gradient(135deg, #ffffff 0%, #fff7f0 75%, #f1eae0 100%)';
-                petal.style.left = Math.random() * 100 + '%'; 
-                petal.style.animationDuration = Math.random() * 4 + 5 + 's'; 
-                petal.style.animationDelay = Math.random() * 6 + 's'; 
-                
-                if(Math.random() > 0.5) {
-                    petal.style.transform = 'scaleX(-1)';
-                }
-                
-                container.appendChild(petal);
-            }
-        }
-
-        // كود حساب العداد التنازلي التلقائي الدقيق
-        const eventDate = new Date('September 1, 2026 18:00:00').getTime();
-        const timerInterval = setInterval(function() {
-            const now = new Date().getTime();
-            const timeLeft = eventDate - now;
-
-            const d = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const h = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = d;
-            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-
-            if (timeLeft < 0) {
-                clearInterval(timerInterval);
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
-            }
-        }, 1000);
     </script>
 </body>
 </html>
-
-
- 
