@@ -2,50 +2,72 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; overflow: hidden; }
-        .container { width: 100%; max-width: 600px; text-align: center; }
-        video { width: 100%; cursor: pointer; border-radius: 15px; }
-        #invitation-card { display: none; padding: 20px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .hidden { display: none; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #f4f4f4; }
+        
+        .video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* يملأ الشاشة بالكامل بدون زووم غريب */
+            cursor: pointer;
+        }
+
+        #invitation-card {
+            display: none;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <video id="video1" muted playsinline>
-        <source src="WhatsApp Video 1447-12-07 at 22.04.39.mp4" type="video/mp4">
-    </video>
+    <div class="video-wrapper" id="container">
+        <video id="video1" muted playsinline autoplay>
+            <source src="WhatsApp Video 1447-12-07 at 22.04.39.mp4" type="video/mp4">
+        </video>
 
-    <video id="video2" class="hidden" playsinline>
-        <source src="WhatsApp Video 1447-12-07 at 22.04.40.mp4" type="video/mp4">
-    </video>
-
-    <div id="invitation-card">
-        <h1>حفل زفاف سعيد</h1>
-        <p>يسعدنا تشريفكم لنا في هذه الليلة المميزة...</p>
+        <video id="video2" class="hidden" muted playsinline>
+            <source src="WhatsApp Video 1447-12-07 at 22.04.40.mp4" type="video/mp4">
+        </video>
     </div>
-</div>
+
+    <div id="invitation-card" class="hidden">
+        <h1>حفل الزفاف</h1>
+    </div>
 
 <script>
     const v1 = document.getElementById('video1');
     const v2 = document.getElementById('video2');
     const card = document.getElementById('invitation-card');
 
-    // تشغيل الفيديو الأول تلقائياً (بما أنه صامت)
-    v1.play();
+    // عند الضغط في أي مكان على الشاشة
+    document.addEventListener('click', () => {
+        if (!v1.classList.contains('hidden')) {
+            v1.classList.add('hidden');
+            v2.classList.remove('hidden');
+            v2.play();
+        }
+    }, { once: true }); // تعمل مرة واحدة فقط
 
-    // عند الضغط على الفيديو الأول
-    v1.addEventListener('click', () => {
-        v1.classList.add('hidden');
-        v2.classList.remove('hidden');
-        v2.play();
-    });
-
-    // عند انتهاء الفيديو الثاني (فتح الظرف)
     v2.onended = () => {
         v2.classList.add('hidden');
-        card.style.display = 'block';
+        card.classList.remove('hidden');
     };
 </script>
 
