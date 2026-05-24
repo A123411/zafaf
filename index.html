@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>دعوة زفاف</title>
+<title>دعوة زفاف محمد ومريم</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -38,7 +38,7 @@ linear-gradient(135deg,#fffaf4,#f8efe2);
 z-index:-3;
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
 min-height:100vh;
 display:flex;
@@ -48,78 +48,89 @@ text-align:center;
 padding:40px 20px;
 }
 
-.hero-content{
-max-width:850px;
-}
+.hero-content{max-width:850px;}
 
-/* الاسم في سطر واحد */
-.names{
-font-family:'Alex Brush';
-font-size:5.5rem;
+.tag{
+display:inline-block;
+padding:6px 14px;
+border-radius:50px;
+background:rgba(184,134,11,.12);
 color:#b8860b;
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-text-shadow:0 10px 25px rgba(184,134,11,.25);
-}
-
-/* التاريخ في سطر واحد */
-.date{
-margin-top:15px;
-font-size:1.2rem;
-color:#8a6f3d;
+font-size:.9rem;
+margin-bottom:15px;
 font-weight:600;
 }
 
-/* جملة صغيرة */
+.hero h1{
+font-family:'Alex Brush';
+font-size:6rem;
+color:#b8860b;
+margin-bottom:10px;
+text-shadow:0 10px 25px rgba(184,134,11,.25);
+}
+
 .sub{
-margin-top:15px;
-font-size:1.2rem;
+font-size:1.3rem;
 color:#666;
+margin:15px 0 25px;
+}
+
+.date{
+font-size:1.1rem;
+color:#8a6f3d;
+margin-bottom:30px;
+font-weight:600;
 }
 
 /* العداد */
 .timer{
 display:flex;
-gap:12px;
+gap:15px;
 justify-content:center;
 flex-wrap:wrap;
-margin-top:25px;
+margin-bottom:20px;
 }
 
 .time-box{
 background:white;
-padding:15px;
-width:90px;
-border-radius:16px;
-box-shadow:0 10px 20px rgba(0,0,0,.08);
+padding:18px;
+width:95px;
+border-radius:18px;
+box-shadow:0 12px 25px rgba(0,0,0,.08);
 }
 
 .time-box span{
-font-size:1.8rem;
+font-size:2rem;
 color:#b8860b;
 font-weight:bold;
 }
 
-/* أقسام */
+/* الأقسام */
 .section{
-padding:100px 20px;
+padding:120px 20px;
 text-align:center;
 }
 
 .section-title{
 font-family:'Alex Brush';
-font-size:4rem;
+font-size:4.5rem;
 color:#b8860b;
 margin-bottom:25px;
 }
 
 /* القاعة */
-.hall-img{
-width:100%;
+.hall-card{
 max-width:900px;
-margin:auto;
+margin:50px auto 0;
+display:flex;
+flex-direction:column;
+gap:20px;
+align-items:center;
+}
+
+.hall-img{
+position:relative;
+width:100%;
 border-radius:25px;
 overflow:hidden;
 box-shadow:0 20px 40px rgba(0,0,0,.15);
@@ -129,61 +140,104 @@ box-shadow:0 20px 40px rgba(0,0,0,.15);
 width:100%;
 height:420px;
 object-fit:cover;
+transition:.5s;
 }
 
-/* زر */
+.hall-img:hover img{
+transform:scale(1.05);
+}
+
+.hall-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top, rgba(0,0,0,.65), transparent);
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+padding:25px;
+color:white;
+}
+
 .hall-btn{
 display:inline-block;
-margin-top:20px;
-padding:14px 30px;
-border-radius:40px;
+padding:15px 35px;
+border-radius:50px;
 background:linear-gradient(135deg,#b8860b,#d4af37);
 color:white;
 text-decoration:none;
 font-weight:bold;
+box-shadow:0 15px 30px rgba(184,134,11,.25);
+transition:.3s;
 }
 
-/* 🌸 ورق ورد حقيقي */
+.hall-btn:hover{
+transform:translateY(-5px) scale(1.05);
+}
+
+/* 🌸 ورد */
 .petal{
 position:fixed;
 top:-10vh;
 width:18px;
-height:12px;
-background:linear-gradient(145deg,#ffd1dc,#ff7aa2);
-border-radius:70% 30% 70% 30%;
-opacity:0.8;
-filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));
+height:14px;
+background:linear-gradient(145deg,#ffd1dc,#ff6b9a);
+border-radius:60% 40% 60% 40%;
+opacity:0.9;
+filter:drop-shadow(0 3px 6px rgba(0,0,0,.15));
 animation:fall linear infinite;
 pointer-events:none;
 z-index:9999;
 }
 
 @keyframes fall{
-0%{transform:translateY(-10vh) rotate(0deg);}
-100%{transform:translateY(110vh) rotate(360deg) translateX(50px);}
+0%{transform:translateY(-10vh) rotate(0deg);opacity:0;}
+10%{opacity:1;}
+100%{transform:translateY(110vh) rotate(360deg) translateX(60px);opacity:0;}
 }
 
-/* آخر رسالة */
-.end-message{
-margin-top:80px;
+/* ✨ الخاتمة */
+.final-text{
+padding:120px 20px;
 text-align:center;
-padding:60px 20px;
 background:linear-gradient(135deg,#fffaf4,#f8efe2);
 }
 
-.end-message h2{
+.final-text h2{
 font-family:'Alex Brush';
-font-size:3.5rem;
+font-size:4rem;
 color:#b8860b;
+margin-bottom:20px;
 }
 
-.end-message p{
-margin-top:15px;
-font-size:1.2rem;
-color:#555;
+.final-text p{
 max-width:700px;
-margin-inline:auto;
-line-height:2;
+margin:auto;
+font-size:1.2rem;
+line-height:2.2;
+color:#555;
+}
+
+/* footer */
+footer{
+padding:50px 20px;
+text-align:center;
+background:#1a1a1a;
+color:white;
+margin-top:60px;
+}
+
+/* اسم العروسين بشكل أفخم */
+.names{
+font-family:'Alex Brush';
+font-size:2.5rem;
+color:#d4af37;
+letter-spacing:1px;
+}
+
+.sub-footer{
+margin-top:10px;
+font-size:0.95rem;
+opacity:0.8;
 }
 
 </style>
@@ -196,11 +250,11 @@ line-height:2;
 
 <div class="hero-content">
 
-<div class="names">
-محمد & مريم
-</div>
+<div class="tag">✨ دعوة زفاف</div>
 
-<div class="sub">ليلة واحدة تبدأ منها الحكاية ❤️</div>
+<h1>محمد & مريم</h1>
+
+<p class="sub">ليلة واحدة… لكنها بداية عمر كامل من الحكاية ❤️</p>
 
 <div class="date">1 سبتمبر 2026 — 6:00 مساءً</div>
 
@@ -215,35 +269,73 @@ line-height:2;
 
 </section>
 
+<!-- القصة -->
+<section class="section">
+<h2 class="section-title">قصتنا</h2>
+<p>بدأت الحكاية بلقاء بسيط تحول إلى أجمل قصة حب...</p>
+</section>
+
+<!-- رحلة الحب -->
+<section class="section">
+<h2 class="section-title">رحلة الحب</h2>
+
+<div class="love-timeline">
+<div class="love-card">💫 البداية</div>
+<div class="love-card">💛 التعارف</div>
+<div class="love-card">💍 الخطوبة</div>
+<div class="love-card">✨ الزفاف</div>
+</div>
+
+</section>
+
 <!-- القاعة -->
 <section class="section">
 <h2 class="section-title">مكان الحفل</h2>
 
+<div class="hall-card">
+
 <div class="hall-img">
 <img src="https://images.unsplash.com/photo-1529634896101-1c7f3c1a5b1f">
+<div class="hall-overlay">
+<h3>قاعة الاحتفال</h3>
+</div>
 </div>
 
 <a class="hall-btn" href="https://maps.google.com" target="_blank">
-📍 عرض الموقع
+📍 الموقع على الخريطة
 </a>
 
+</div>
 </section>
 
-<!-- نهاية -->
-<section class="end-message">
+<!-- ✨ خاتمة -->
+<section class="final-text">
 
-<h2>ننتظركم بكل الحب ❤️</h2>
+<h2>ننتظركم بكل حب</h2>
 
 <p>
-وجودكم هو أجمل فرحة في يومنا هذا 🌸<br>
-نفرح بكم ونكمل معكم أجمل بداية لحياتنا
+وجودكم هو أجمل هدية في هذه الليلة المميزة ❤️<br>
+فرحتكم تكمل فرحتنا وتخلّي اللحظة لا تُنسى
 </p>
 
 </section>
 
+<!-- footer -->
+<footer>
+
+<div class="names">محمد</div>
+<div class="names">&</div>
+<div class="names">مريم</div>
+
+<div class="sub-footer">
+Wedding Invitation • 2026 ✨
+</div>
+
+</footer>
+
 <script>
 
-/* عداد */
+/* العداد */
 const eventDate = new Date("September 1, 2026 18:00:00").getTime();
 
 setInterval(()=>{
@@ -257,16 +349,12 @@ document.getElementById('secs').innerHTML = Math.floor((diff % (1000*60))/1000);
 
 },1000);
 
-/* 🌸 ورق ورد أنظف */
-for(let i=0;i<70;i++){
+/* ورد */
+for(let i=0;i<80;i++){
 let petal=document.createElement("div");
 petal.classList.add("petal");
-
 petal.style.left=Math.random()*100+"vw";
-petal.style.animationDuration=(5+Math.random()*6)+"s";
-petal.style.opacity=0.4+Math.random()*0.6;
-petal.style.transform="scale("+(0.6+Math.random())+")";
-
+petal.style.animationDuration=(4+Math.random()*6)+"s";
 document.body.appendChild(petal);
 }
 
