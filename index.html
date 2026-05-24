@@ -29,13 +29,18 @@ background:#fdf8f2;
 overflow-x:hidden;
 color:#333;
 opacity:0;
-animation:pageIn 1s ease forwards;
+animation:pageIn 1s ease forwards, subtleMove 8s ease-in-out infinite;
 -webkit-font-smoothing:antialiased;
 -moz-osx-font-smoothing:grayscale;
 }
 
 @keyframes pageIn{
 to{opacity:1}
+}
+
+@keyframes subtleMove{
+0%,100%{background-position:0 0;}
+50%{background-position:30px 30px;}
 }
 
 /* الخلفية */
@@ -62,15 +67,15 @@ padding:40px 20px;
 
 .hero-content{
 max-width:850px;
-animation:heroFade 1.5s ease;
+animation:heroFloat 1.6s ease;
 }
 
-@keyframes heroFade{
-0%{
+@keyframes heroFloat{
+from{
 opacity:0;
-transform:translateY(40px) scale(.98);
+transform:translateY(40px) scale(.97);
 }
-100%{
+to{
 opacity:1;
 transform:translateY(0) scale(1);
 }
@@ -85,7 +90,12 @@ color:#b8860b;
 font-size:.9rem;
 margin-bottom:15px;
 font-weight:600;
-animation:fadePulse 2s infinite;
+animation:glowTag 3s infinite;
+}
+
+@keyframes glowTag{
+0%,100%{box-shadow:0 0 0 rgba(184,134,11,0);}
+50%{box-shadow:0 0 20px rgba(184,134,11,.25);}
 }
 
 .hero h1{
@@ -94,34 +104,29 @@ font-size:6rem;
 color:#b8860b;
 margin-bottom:10px;
 text-shadow:0 10px 25px rgba(184,134,11,.25);
-animation:floatName 4s ease-in-out infinite;
+animation:floatName 4s ease-in-out infinite, textGlow 3s infinite;
 }
 
 @keyframes floatName{
-0%,100%{
-transform:translateY(0);
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
 }
-50%{
-transform:translateY(-6px);
-}
+
+@keyframes textGlow{
+0%,100%{text-shadow:0 10px 25px rgba(184,134,11,.25);}
+50%{text-shadow:0 10px 40px rgba(184,134,11,.45);}
 }
 
 .sub{
 font-size:1.3rem;
 color:#666;
 margin:15px 0 25px;
-animation:fadeText 2s ease;
+animation:fadeText 1.5s ease;
 }
 
 @keyframes fadeText{
-from{
-opacity:0;
-transform:translateY(15px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 .date{
@@ -147,7 +152,7 @@ width:95px;
 border-radius:18px;
 box-shadow:0 12px 25px rgba(0,0,0,.08);
 transition:.35s;
-animation:softGlow 3s ease-in-out infinite;
+animation:cardBreath 5s ease-in-out infinite;
 }
 
 .time-box:hover{
@@ -160,13 +165,9 @@ color:#b8860b;
 font-weight:bold;
 }
 
-@keyframes softGlow{
-0%,100%{
-box-shadow:0 12px 25px rgba(0,0,0,.08);
-}
-50%{
-box-shadow:0 15px 35px rgba(212,175,55,.22);
-}
+@keyframes cardBreath{
+0%,100%{transform:translateY(0) scale(1);}
+50%{transform:translateY(-6px) scale(1.02);}
 }
 
 /* مؤشر السكرول */
@@ -203,14 +204,8 @@ animation:wheel 1.5s infinite;
 }
 
 @keyframes wheel{
-0%{
-opacity:1;
-transform:translate(-50%,0);
-}
-100%{
-opacity:0;
-transform:translate(-50%,12px);
-}
+0%{opacity:1;transform:translate(-50%,0);}
+100%{opacity:0;transform:translate(-50%,12px);}
 }
 
 @keyframes fadePulse{
@@ -218,24 +213,22 @@ transform:translate(-50%,12px);
 50%{opacity:1;}
 }
 
-/* السكشنات */
+/* السكشن */
 .section{
 padding:120px 20px;
 text-align:center;
 opacity:0;
 transform:translate3d(0,60px,0);
-transition:
-opacity .9s ease,
-transform .9s cubic-bezier(.22,1,.36,1);
+transition:.9s cubic-bezier(.22,1,.36,1);
 will-change:opacity,transform;
-backface-visibility:hidden;
 }
 
 .section.show{
 opacity:1;
-transform:translate3d(0,0,0);
+transform:translate3d(0,0,0) scale(1);
 }
 
+/* العناوين */
 .section-title{
 font-family:'Alex Brush';
 font-size:4.5rem;
@@ -245,14 +238,8 @@ animation:fadeUp 2s ease infinite alternate;
 }
 
 @keyframes fadeUp{
-from{
-transform:translateY(0);
-opacity:.85;
-}
-to{
-transform:translateY(-6px);
-opacity:1;
-}
+from{transform:translateY(0);opacity:.85;}
+to{transform:translateY(-6px);opacity:1;}
 }
 
 /* قصة الحب */
@@ -269,30 +256,18 @@ padding:30px 20px;
 border-radius:25px;
 box-shadow:0 20px 40px rgba(0,0,0,.08);
 transition:.45s;
+animation:cardFloat 5s ease-in-out infinite;
 position:relative;
 overflow:hidden;
-animation:cardFloat 5s ease-in-out infinite;
 }
 
-.love-card:nth-child(2){
-animation-delay:.5s;
-}
-
-.love-card:nth-child(3){
-animation-delay:1s;
-}
-
-.love-card:nth-child(4){
-animation-delay:1.5s;
-}
+.love-card:nth-child(2){animation-delay:.5s;}
+.love-card:nth-child(3){animation-delay:1s;}
+.love-card:nth-child(4){animation-delay:1.5s;}
 
 @keyframes cardFloat{
-0%,100%{
-transform:translateY(0);
-}
-50%{
-transform:translateY(-8px);
-}
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
 }
 
 .love-card::before{
@@ -324,9 +299,9 @@ position:relative;
 width:100%;
 border-radius:25px;
 overflow:hidden;
-box-shadow:0 20px 40px rgba(0,0,0,.15);
 background:#eee;
 min-height:420px;
+box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .hall-img img{
@@ -334,17 +309,13 @@ width:100%;
 height:420px;
 object-fit:cover;
 display:block;
-transition:1.2s ease;
 animation:slowZoom 10s ease-in-out infinite;
+transition:1.2s ease;
 }
 
 @keyframes slowZoom{
-0%,100%{
-transform:scale(1);
-}
-50%{
-transform:scale(1.05);
-}
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
 }
 
 .hall-overlay{
@@ -358,6 +329,7 @@ padding:25px;
 color:white;
 }
 
+/* زر */
 .hall-btn{
 display:inline-block;
 padding:15px 35px;
@@ -370,6 +342,7 @@ box-shadow:0 15px 30px rgba(184,134,11,.25);
 transition:.35s;
 position:relative;
 overflow:hidden;
+animation:btnPulse 2.5s infinite;
 }
 
 .hall-btn::before{
@@ -379,21 +352,16 @@ top:0;
 left:-120%;
 width:100%;
 height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.35),
-transparent
-);
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
 transition:.7s;
 }
 
-.hall-btn:hover::before{
-left:120%;
-}
+.hall-btn:hover::before{left:120%;}
+.hall-btn:hover{transform:translateY(-5px) scale(1.05);}
 
-.hall-btn:hover{
-transform:translateY(-5px) scale(1.05);
+@keyframes btnPulse{
+0%,100%{box-shadow:0 15px 30px rgba(184,134,11,.25);}
+50%{box-shadow:0 15px 40px rgba(184,134,11,.45);}
 }
 
 /* الخاتمة */
@@ -427,21 +395,11 @@ background:#1a1a1a;
 color:white;
 }
 
-/* Responsive */
+/* responsive */
 @media(max-width:768px){
-
-.hero h1{
-font-size:4rem;
-}
-
-.section-title{
-font-size:3.2rem;
-}
-
-.final-message h2{
-font-size:3rem;
-}
-
+.hero h1{font-size:4rem;}
+.section-title{font-size:3.2rem;}
+.final-message h2{font-size:3rem;}
 }
 
 </style>
@@ -449,45 +407,22 @@ font-size:3rem;
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
-
 <div class="hero-content">
 
 <div class="tag">✨ دعوة زفاف</div>
 
 <h1>محمد & مريم</h1>
 
-<p class="sub">
-ليلة واحدة… لكنها بداية عمر كامل من الحكاية ❤️
-</p>
+<p class="sub">ليلة واحدة… لكنها بداية عمر كامل من الحكاية ❤️</p>
 
-<div class="date">
-1 سبتمبر 2026 — 6:00 مساءً
-</div>
+<div class="date">1 سبتمبر 2026 — 6:00 مساءً</div>
 
 <div class="timer">
-
-<div class="time-box">
-<span id="days">00</span>
-<div>يوم</div>
-</div>
-
-<div class="time-box">
-<span id="hours">00</span>
-<div>ساعة</div>
-</div>
-
-<div class="time-box">
-<span id="mins">00</span>
-<div>دقيقة</div>
-</div>
-
-<div class="time-box">
-<span id="secs">00</span>
-<div>ثانية</div>
-</div>
-
+<div class="time-box"><span id="days">00</span><div>يوم</div></div>
+<div class="time-box"><span id="hours">00</span><div>ساعة</div></div>
+<div class="time-box"><span id="mins">00</span><div>دقيقة</div></div>
+<div class="time-box"><span id="secs">00</span><div>ثانية</div></div>
 </div>
 
 <div class="scroll-indicator">
@@ -496,148 +431,63 @@ font-size:3rem;
 </div>
 
 </div>
-
 </section>
 
-<!-- القصة -->
 <section class="section">
-
 <h2 class="section-title">قصتنا</h2>
-
-<p>
-بدأت الحكاية بلقاء بسيط تحول إلى أجمل قصة حب...
-</p>
-
+<p>بدأت الحكاية بلقاء بسيط تحول إلى أجمل قصة حب...</p>
 </section>
 
-<!-- رحلة الحب -->
 <section class="section">
-
 <h2 class="section-title">رحلة الحب</h2>
 
 <div class="love-timeline">
-
-<div class="love-card">
-<h3>💫 البداية</h3>
-<p>لقاء غيّر كل شيء.</p>
-</div>
-
-<div class="love-card">
-<h3>💛 التعارف</h3>
-<p>ضحك وحديث قرّب القلوب.</p>
-</div>
-
-<div class="love-card">
-<h3>💍 الخطوبة</h3>
-<p>خطوة نحو المستقبل.</p>
-</div>
-
-<div class="love-card">
-<h3>✨ الزفاف</h3>
-<p>نكتب النهاية السعيدة.</p>
-</div>
-
+<div class="love-card"><h3>💫 البداية</h3><p>لقاء غيّر كل شيء.</p></div>
+<div class="love-card"><h3>💛 التعارف</h3><p>ضحك وحديث قرّب القلوب.</p></div>
+<div class="love-card"><h3>💍 الخطوبة</h3><p>خطوة نحو المستقبل.</p></div>
+<div class="love-card"><h3>✨ الزفاف</h3><p>نكتب النهاية السعيدة.</p></div>
 </div>
 
 </section>
 
-<!-- مكان الحفل -->
 <section class="section">
-
 <h2 class="section-title">مكان الحفل</h2>
 
 <div class="hall-card">
-
 <div class="hall-img">
-
-<img 
-src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400&auto=format&fit=crop"
-loading="eager"
-decoding="async"
->
-
-<div class="hall-overlay">
-<h3>قاعة الاحتفال</h3>
+<img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400&auto=format&fit=crop">
+<div class="hall-overlay"><h3>قاعة الاحتفال</h3></div>
 </div>
 
-</div>
-
-<a class="hall-btn" href="https://maps.google.com" target="_blank">
-📍 الموقع على الخريطة
-</a>
-
+<a class="hall-btn" href="https://maps.google.com" target="_blank">📍 الموقع على الخريطة</a>
 </div>
 
 </section>
 
-<!-- الخاتمة -->
 <section class="final-message">
-
 <h2>ننتظركم في ليلة لا تُنسى</h2>
-
-<p>
-وجودكم هو أجمل هدية لنا في هذا اليوم الخاص ❤️
-<br>
-نفرح بكم ونكمل معكم أجمل بداية لحكايتنا الجديدة
-</p>
-
+<p>وجودكم هو أجمل هدية لنا ❤️</p>
 </section>
 
-<footer>
-محمد & مريم — 2026 ✨
-</footer>
+<footer>محمد & مريم — 2026 ✨</footer>
 
 <script>
 
-/* العداد */
-const eventDate = new Date("September 1, 2026 18:00:00").getTime();
+/* reveal */
+const sections=document.querySelectorAll('.section');
 
-setInterval(()=>{
-
-const now = new Date().getTime();
-const diff = eventDate - now;
-
-document.getElementById('days').innerHTML =
-Math.floor(diff / (1000*60*60*24));
-
-document.getElementById('hours').innerHTML =
-Math.floor((diff % (1000*60*60*24))/(1000*60*60));
-
-document.getElementById('mins').innerHTML =
-Math.floor((diff % (1000*60*60))/(1000*60));
-
-document.getElementById('secs').innerHTML =
-Math.floor((diff % (1000*60))/1000);
-
-},1000);
-
-
-/* Reveal سريع وناعم */
-const sections = document.querySelectorAll('.section');
-
-function revealSections(){
-
-const triggerBottom = window.innerHeight * 0.92;
-
-sections.forEach(section => {
-
-const rect = section.getBoundingClientRect();
-
-if(rect.top < triggerBottom){
-section.classList.add('show');
+function reveal(){
+const t=window.innerHeight*0.92;
+sections.forEach(s=>{
+if(s.getBoundingClientRect().top<t){
+s.classList.add('show');
+}
+});
 }
 
-});
-
-}
-
-window.addEventListener('load', revealSections);
-
-window.addEventListener('scroll', revealSections, {
-passive:true
-});
-
-window.addEventListener('resize', revealSections);
+window.addEventListener('scroll',reveal,{passive:true});
+window.addEventListener('load',reveal);
+window.addEventListener('resize',reveal);
 
 </script>
 
