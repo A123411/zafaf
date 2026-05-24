@@ -263,7 +263,7 @@ transition:.3s;
 transform:translateY(-5px) scale(1.05);
 }
 
-/* 🌸 ورد واقعي أقوى */
+/* 🌸 ورد */
 .petal{
 position:fixed;
 top:-10vh;
@@ -400,6 +400,7 @@ color:white;
 </a>
 
 </div>
+
 </section>
 
 <!-- ✨ الخاتمة -->
@@ -434,20 +435,33 @@ document.getElementById('secs').innerHTML = Math.floor((diff % (1000*60))/1000);
 
 },1000);
 
-/* ظهور الأقسام */
-const sections=document.querySelectorAll('.section');
 
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add('show');
+/* 🔥 FIX SCROLL (المهم) */
+const sections = document.querySelectorAll('.section');
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('show');
 }
 });
-},{threshold:0.2});
+}, {
+threshold: 0.1,
+rootMargin: "0px 0px -80px 0px"
+});
 
-sections.forEach(s=>observer.observe(s));
+sections.forEach(section => observer.observe(section));
 
-/* 🌸 ورد أقوى وأوضح */
+window.addEventListener("load", () => {
+sections.forEach(section => {
+const rect = section.getBoundingClientRect();
+if (rect.top < window.innerHeight) {
+section.classList.add("show");
+}
+});
+});
+
+/* 🌸 ورد */
 for(let i=0;i<70;i++){
 let petal=document.createElement("div");
 petal.classList.add("petal");
