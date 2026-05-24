@@ -459,7 +459,7 @@ color:white;
 <div class="hall-overlay"><h3>قاعة الاحتفال</h3></div>
 </div>
 
-<a class="hall-btn" href="#" target="_blank">📍 الموقع على الخريطة</a>
+<a class="hall-btn" href="https://maps.google.com" target="_blank">📍 الموقع على الخريطة</a>
 </div>
 
 </section>
@@ -472,22 +472,6 @@ color:white;
 <footer>محمد & مريم — 2026 ✨</footer>
 
 <script>
-
-/* العداد */
-function updateTimer() {
-    const eventDate = new Date("September 1, 2026 18:00:00").getTime();
-    const now = new Date().getTime();
-    const diff = eventDate - now;
-
-    if (diff > 0) {
-        document.getElementById('days').innerHTML = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById('hours').innerHTML = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('mins').innerHTML = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById('secs').innerHTML = Math.floor((diff % (1000 * 60)) / 1000);
-    }
-}
-setInterval(updateTimer, 1000);
-updateTimer();
 
 /* reveal */
 const sections=document.querySelectorAll('.section');
@@ -509,4 +493,3 @@ window.addEventListener('resize',reveal);
 
 </body>
 </html>
-
