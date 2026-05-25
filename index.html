@@ -4,98 +4,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>دعوة زفاف محمد ومريم</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* الأساس */
+/* الأساس - الحفاظ على الديزاين */
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
-body{font-family:'Cairo',sans-serif;background:#fdf8f2;overflow-x:hidden;color:#333;opacity:0;animation:pageIn 1s ease forwards;}
-@keyframes pageIn{to{opacity:1}}
+body{font-family:'Cairo',sans-serif;background:#fdf8f2;color:#333;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at top left,#f9ead2 0%,transparent 35%),radial-gradient(circle at bottom right,#f3d8aa 0%,transparent 35%),linear-gradient(135deg,#fffaf4,#f8efe2);z-index:-3;}
 
-/* HERO - تقليل المسافات */
-.hero{min-height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;}
-.hero-content{max-width:850px;width:100%;}
-.tag{display:inline-block;padding:4px 12px;border-radius:50px;background:rgba(184,134,11,.12);color:#b8860b;font-size:0.8rem;margin-bottom:10px;font-weight:600;}
-.hero h1{font-family:'Alex Brush';font-size:3.8rem;color:#b8860b;margin-bottom:5px;white-space:nowrap;}
-.sub{font-size:1rem;color:#666;margin:5px 0 15px;}
-.date{font-size:0.9rem;color:#8a6f3d;margin-bottom:20px;font-weight:600;}
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;}
+.tag{background:rgba(184,134,11,.12);color:#b8860b;padding:5px 15px;border-radius:50px;font-size:0.9rem;margin-bottom:15px;}
 
-/* العداد - سطر واحد ملموم */
-.timer{display:flex;justify-content:center;gap:6px;margin-bottom:20px;direction:rtl;}
-.time-box{background:white;padding:8px 5px;width:65px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.05);text-align:center;}
-.time-box span{display:block;font-size:1.2rem;color:#b8860b;font-weight:bold;}
-.time-box div{font-size:0.6rem;color:#888;}
+/* تكبير اسم العريسين بدون النزول لسطر جديد */
+.hero h1{font-family:'Alex Brush';font-size:5rem;color:#b8860b;margin-bottom:10px;white-space:nowrap;}
 
-/* مؤشر السكرول (الأنيميشن) */
-.scroll-indicator{margin-top:15px;display:flex;flex-direction:column;align-items:center;gap:5px;color:#caa35a;font-size:0.8rem;}
-.mouse{width:18px;height:28px;border:2px solid #caa35a;border-radius:10px;position:relative;}
-.mouse::before{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:3px;height:5px;background:#caa35a;border-radius:50%;animation:wheel 1.5s infinite;}
-@keyframes wheel{0%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,10px);}}
+.sub{font-size:1.3rem;color:#555;margin-bottom:20px;}
+.date{font-size:1.1rem;color:#8a6f3d;margin-bottom:25px;font-weight:bold;}
 
-/* السكاشن */
-.section{padding:50px 20px;text-align:center;opacity:0;transform:translateY(30px);transition:0.8s ease;}
-.section.show{opacity:1;transform:translateY(0);}
-.section-title{font-family:'Alex Brush';font-size:3rem;color:#b8860b;margin-bottom:20px;}
+/* العداد - تكبير الخانات لتملأ الشاشة في سطر واحد */
+.timer{display:flex;justify-content:center;gap:10px;margin-bottom:30px;width:100%;}
+.time-box{background:white;padding:15px 5px;width:80px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);text-align:center;}
+.time-box span{display:block;font-size:1.8rem;color:#b8860b;font-weight:bold;}
+.time-box div{font-size:0.8rem;color:#777;margin-top:2px;}
 
-/* رحلة الحب */
-.love-timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:20px;}
-.love-card{background:white;padding:20px 10px;border-radius:15px;box-shadow:0 10px 20px rgba(0,0,0,0.05);position:relative;overflow:hidden;}
-.love-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#b8860b,#f4d36b);}
-
-/* القاعة */
-.hall-card{max-width:700px;margin:20px auto 0;text-align:center;}
-.hall-img{border-radius:15px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,0.1);}
-.hall-img img{width:100%;height:250px;object-fit:cover;}
-.hall-btn{display:inline-block;margin-top:15px;padding:12px 30px;background:linear-gradient(135deg,#b8860b,#d4af37);color:white;text-decoration:none;border-radius:50px;font-weight:bold;}
-
-footer{padding:20px;text-align:center;background:#1a1a1a;color:white;font-size:0.8rem;}
+/* مؤشر السكرول */
+.scroll-indicator{margin-top:30px;color:#caa35a;font-size:0.9rem;}
 </style>
 </head>
 
 <body>
 
 <section class="hero">
-<div class="hero-content">
     <div class="tag">✨ دعوة زفاف</div>
     <h1>محمد & مريم</h1>
     <p class="sub">ليلة واحدة… لكنها بداية عمر كامل من الحكاية ❤️</p>
     <div class="date">1 سبتمبر 2026 — 6:00 مساءً</div>
+    
     <div class="timer">
         <div class="time-box"><span id="days">00</span><div>يوم</div></div>
         <div class="time-box"><span id="hours">00</span><div>ساعة</div></div>
         <div class="time-box"><span id="mins">00</span><div>دقيقة</div></div>
         <div class="time-box"><span id="secs">00</span><div>ثانية</div></div>
     </div>
-    <div class="scroll-indicator">
-        <div class="mouse"></div>
-        <span>مرّر للأسفل</span>
-    </div>
-</div>
+    
+    <div class="scroll-indicator">مرّر للأسفل ⬇️</div>
 </section>
-
-<section class="section">
-    <h2 class="section-title">رحلة الحب</h2>
-    <div class="love-timeline">
-        <div class="love-card"><h3>💫 البداية</h3><p>لقاء غيّر كل شيء.</p></div>
-        <div class="love-card"><h3>💛 التعارف</h3><p>ضحك وحديث قرّب القلوب.</p></div>
-        <div class="love-card"><h3>💍 الخطوبة</h3><p>خطوة نحو المستقبل.</p></div>
-        <div class="love-card"><h3>✨ الزفاف</h3><p>نكتب النهاية السعيدة.</p></div>
-    </div>
-</section>
-
-<section class="section">
-    <h2 class="section-title">مكان الحفل</h2>
-    <div class="hall-card">
-        <div class="hall-img"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400&auto=format&fit=crop"></div>
-        <a class="hall-btn" href="#" target="_blank">📍 الموقع على الخريطة</a>
-    </div>
-</section>
-
-<footer>محمد & مريم — 2026 ✨</footer>
 
 <script>
 function updateTimer() {
@@ -111,9 +65,8 @@ function updateTimer() {
 }
 setInterval(updateTimer, 1000);
 updateTimer();
-const sections = document.querySelectorAll('.section');
-window.addEventListener('scroll', () => { sections.forEach(s => { if (s.getBoundingClientRect().top < window.innerHeight * 0.9) s.classList.add('show'); }); });
 </script>
 
 </body>
 </html>
+
